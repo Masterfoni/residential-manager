@@ -36,6 +36,11 @@ public class Usuario {
     @Column (name="TXT_SEXO")
     private String sexo;
     
+    @NotNull
+    @OneToOne
+    @JoinColumn(name="ID_TIPO_USUARIO", referencedColumnName = "ID")
+    private TipoUsuario tipoUsuario;
+    
     public String getNome() {
             return nome;
     }
@@ -90,5 +95,13 @@ public class Usuario {
 
     public void setId(Long id) {
             this.id = id;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 }
