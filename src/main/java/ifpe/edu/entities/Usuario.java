@@ -1,13 +1,15 @@
 package ifpe.edu.entities;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Entity
 @Table(name="USUARIO")
 @Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn (name="DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length=20)
 @Access(AccessType.FIELD)
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     protected Long id;
