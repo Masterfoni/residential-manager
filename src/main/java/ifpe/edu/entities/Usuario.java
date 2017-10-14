@@ -5,7 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="USUARIO")
+@Table(name="TB_USUARIO")
 @Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn (name="DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length=20)
 @Access(AccessType.FIELD)
@@ -16,7 +16,7 @@ public class Usuario implements Serializable {
     
     @NotNull
     @Column (name="TXT_NOME")
-    protected String nome;
+    private String nome;
 
     @NotNull
     @Column(name="TXT_EMAIL", unique = true)
