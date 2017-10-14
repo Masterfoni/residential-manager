@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,6 +25,7 @@ import javax.validation.constraints.NotNull;
  * @author DaniloP
  */
 @Entity
+@Table(name = "TB_INFORMATIVO")
 public class Informativo implements Serializable {
 
     @Id
