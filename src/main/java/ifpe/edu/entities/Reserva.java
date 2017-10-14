@@ -13,10 +13,12 @@ public class Reserva implements Serializable {
     protected Long id;
     
     @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="DT_INICIO")
     private Date data_inicio;
     
     @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="DT_FIM")
     private Date data_fim;
     
