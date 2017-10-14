@@ -15,12 +15,12 @@ public class Reserva implements Serializable {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="DT_INICIO")
-    private Date data_inicio;
+    private Date dataInicio;
     
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="DT_FIM")
-    private Date data_fim;
+    private Date dataFim;
     
     @NotNull
     @Column(name="SITUACAO")
@@ -42,20 +42,20 @@ public class Reserva implements Serializable {
         this.id = id;
     }
 
-    public Date getData_inicio() {
-        return data_inicio;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setData_inicio(Date data_inicio) {
-        this.data_inicio = data_inicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public Date getData_fim() {
-        return data_fim;
+    public Date getDataFim() {
+        return dataFim;
     }
 
-    public void setData_fim(Date data_fim) {
-        this.data_fim = data_fim;
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 
     public int getSituacao() {
