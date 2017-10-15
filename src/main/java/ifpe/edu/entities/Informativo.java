@@ -18,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -37,8 +39,7 @@ public class Informativo implements Serializable {
     protected  String descricao;
     
     @Lob    
-    @Column (name ="IMAGEM") 
-    @Basic(fetch=FetchType.EAGER)
+    @Column (name ="FOTO_IMAGEM", columnDefinition = "LONGBLOB") 
     private byte[] imagem;
     
     @OneToOne
@@ -46,6 +47,7 @@ public class Informativo implements Serializable {
     private Usuario usuario;
     
     @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     @Column (name = "DT_CRIACAO")
     private Date dataCriacao;
     
@@ -67,12 +69,12 @@ public class Informativo implements Serializable {
         this.descricao = descricao;
     }
 
-     public Long getImagem() {
+     public byte[] getImagem() {
         
         return imagem;
     }
 
-    public void setImagem(Long imagem) {
+    public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
     
