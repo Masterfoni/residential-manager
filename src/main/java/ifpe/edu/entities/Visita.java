@@ -24,7 +24,6 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="TB_VISITA")
-@Access(AccessType.FIELD)
 public class Visita implements Serializable {
 
     @Id
@@ -32,24 +31,24 @@ public class Visita implements Serializable {
     private Long id;
     
     @NotNull
-    @Column (name="TXT_NOME")
-    protected String nome;
+    @Column(name="TXT_NOME")
+    private String nome;
     
     @NotNull
-    @Column (name="TXT_CPF")
-    protected String cpf;
+    @Column(name="TXT_CPF")
+    private String cpf;
     
     @NotNull
-    @Column (name="TXT_DESCRICAO")
-    protected String descricao;
+    @Column(name="TXT_DESCRICAO")
+    private String descricao;
     
     @OneToOne
-    @JoinColumn (name="ID_USUARIO", referencedColumnName="ID")
+    @JoinColumn(name="ID_USUARIO", referencedColumnName="ID")
     private Usuario usuario;
     
     @NotNull
-    @Column (name="RESERVA")
-    private boolean reserva;
+    @Column(name="RESERVA")
+    private int reserva;
   
     public Long getId() {
         return id;
@@ -91,14 +90,14 @@ public class Visita implements Serializable {
         this.usuario = usuario;
     }
      
-    public boolean getReserva(){
+    public int getReserva(){
         return reserva;
     }
     
-    public void setDescricao(boolean reserva){
+    public void setReserva(int reserva){
         this.reserva = reserva;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
