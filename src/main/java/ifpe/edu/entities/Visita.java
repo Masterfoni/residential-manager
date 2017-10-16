@@ -47,8 +47,8 @@ public class Visita implements Serializable {
     private Usuario usuario;
     
     @NotNull
-    @Column(name="RESERVA")
-    private int reserva;
+    @Column(name="VF_FINALIZADA")
+    private int finalizada;
   
     public Long getId() {
         return id;
@@ -91,36 +91,10 @@ public class Visita implements Serializable {
     }
      
     public int getReserva(){
-        return reserva;
+        return finalizada;
     }
     
-    public void setReserva(int reserva){
-        this.reserva = reserva;
+    public void setReserva(int finalizada){
+        this.finalizada = finalizada;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Visita)) {
-            return false;
-        }
-        Visita other = (Visita) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ifpe.edu.entities.Visita[ id=" + id + " ]";
-    }
-    
 }
