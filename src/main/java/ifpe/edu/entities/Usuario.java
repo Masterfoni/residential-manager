@@ -1,20 +1,22 @@
 package ifpe.edu.entities;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name="USUARIO")
+@Entity
+@Table(name="TB_USUARIO")
 @Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn (name="DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length=20)
 @Access(AccessType.FIELD)
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     protected Long id;
     
     @NotNull
     @Column (name="TXT_NOME")
-    protected String nome;
+    private String nome;
 
     @NotNull
     @Column(name="TXT_EMAIL", unique = true)
@@ -35,6 +37,11 @@ public class Usuario {
     @NotNull
     @Column (name="TXT_SEXO")
     private String sexo;
+    
+    @NotNull
+    @OneToOne
+    @JoinColumn(name="ID_TIPO_USUARIO", referencedColumnName = "ID")
+    private TipoUsuario tipoUsuario;
     
     public String getNome() {
             return nome;
@@ -90,5 +97,13 @@ public class Usuario {
 
     public void setId(Long id) {
             this.id = id;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 }
