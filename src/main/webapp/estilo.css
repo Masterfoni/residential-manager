@@ -1,0 +1,85 @@
+*{
+    margin:0;
+    padding:0;
+    
+}
+.menu{
+    width: 100%;
+    height: 60px;
+    font-family: 'Arial';
+    font-size: 20px;
+    background-color: #4682B4;
+}
+
+.menu ul{
+    list-style: none;
+    position: relative;
+    
+}
+.menu ul li{
+    width: 150px;
+    float: left;
+}
+
+.menu a {
+    padding: 15px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    background-color: #4682B4;
+    color: white;
+}
+
+.menu ul ul {
+    position: absolute;
+    visibility: hidden;
+}
+
+.menu ul li:hover ul{
+    visibility: visible;
+}
+
+.menu a:hover{
+    background-color: #069;
+    color: white;
+}
+
+.menu ul ul li{
+    float: none;
+    border-bottom: solid 1px white;
+}
+
+.menu ul ul li a{
+    background: #4682B4;
+}
+
+
+.content {
+  width: auto;
+  padding-right: auto;
+  padding-left: auto;
+  margin-right: 15%;
+  margin-left: 15%;
+  background: #C0C0C0;
+  text-align: center;  
+
+}
+
+.conteudo{
+    text-align: center;
+    padding-bottom: 130px; 
+    margin: 0px;
+}
+.footer{
+    background-color: #696969;
+    text-align: center;
+    bottom: 0px ;
+}
+
+.botao_menu{
+    margin-left: 90%;
+    height: 70px;
+    position: relative;
+ 
+}
+
