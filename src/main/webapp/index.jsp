@@ -8,8 +8,8 @@
     <body>
         <h1>AINDA EM FASE DE TESTES E SEM LAYOUT!!</h1>
         <form action="ServletLoginLogout" method="post">  
-            Login: <input type="text" name="userName"/><br/>  
-            Senha: <input type="password" name="userPass"/><br/>  
+            Login: <input type="text" name="valLogin"/><br/>  
+            Senha: <input type="password" name="valSenha"/><br/>  
             <input type="hidden" name="ACTION" value="LOGIN"/>
             <input type="submit" value="login"/>  
         </form>  
