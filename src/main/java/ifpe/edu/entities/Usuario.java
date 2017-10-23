@@ -6,9 +6,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TB_USUARIO")
-@Inheritance (strategy = InheritanceType.JOINED)
-@DiscriminatorColumn (name="DISC_USUARIO", discriminatorType = DiscriminatorType.STRING, length=20)
 @Access(AccessType.FIELD)
+@NamedQueries({
+    @NamedQuery(name = "Usuario.findByLoginSenha", query = "SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha")
+})
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,8 +20,8 @@ public class Usuario implements Serializable {
     private String nome;
 
     @NotNull
-    @Column(name="TXT_EMAIL", unique = true)
-    private String email;
+    @Column(name="TXT_LOGIN", unique = true)
+    private String login;
 
     @NotNull
     @Column (name="TXT_SENHA")
@@ -49,14 +50,6 @@ public class Usuario implements Serializable {
 
     public void setNome(String nome) {
             this.nome = nome;
-    }
-
-    public String getEmail() {
-            return email;
-    }
-
-    public void setEmail(String email) {
-            this.email = email;
     }
 
     public String getSenha() {
@@ -105,5 +98,13 @@ public class Usuario implements Serializable {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
