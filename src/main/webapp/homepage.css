@@ -8,7 +8,7 @@
     height: 60px;
     font-family: 'Arial';
     font-size: 20px;
-    background-color: #4682B4;
+    background-color: #1E90FF;
 }
 
 .menu ul{
@@ -26,7 +26,7 @@
     display: block;
     text-decoration: none;
     text-align: center;
-    background-color: #4682B4;
+    background-color: #1E90FF;
     color: white;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .menu a:hover{
-    background-color: #069;
+    background-color: #00BFFF;
     color: white;
 }
 
@@ -50,9 +50,8 @@
 }
 
 .menu ul ul li a{
-    background: #4682B4;
+    background: #87CEEB;
 }
-
 
 .content {
   width: auto;
@@ -60,26 +59,43 @@
   padding-left: auto;
   margin-right: 15%;
   margin-left: 15%;
-  background: #C0C0C0;
-  text-align: center;  
+  background: #DCDCDC;
+  text-align: center;
+  padding-bottom: 0px;
 
 }
-
 .conteudo{
-    text-align: center;
-    padding-bottom: 130px; 
+    padding-bottom: 165px; 
     margin: 0px;
+}
+
+.info{
+    text-align: center;
 }
 .footer{
     background-color: #696969;
     text-align: center;
     bottom: 0px ;
+    color: white;
 }
 
 .botao_menu{
-    margin-left: 90%;
-    height: 70px;
     position: relative;
- 
+    background-color: #1E90FF;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 20px;
+    margin: 1px 1px;
+    margin-left: 500%;
+
 }
+
+.botao_menu:hover{
+    background-color: #00BFFF;
+    color: white;
+}
+
 
