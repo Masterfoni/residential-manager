@@ -35,7 +35,7 @@ public class ServletLoginLogout extends HttpServlet {
         }
         else if(action.equals("LOGOUT"))
         {
-            //Executa a função de realizar logout aqui, similar à de login
+            realizaLogout(request, response);
         }
         else
         {
@@ -64,5 +64,16 @@ public class ServletLoginLogout extends HttpServlet {
             reqDisp = request.getRequestDispatcher("/index.jsp");
             reqDisp.forward(request, response);
         }
+    }
+    
+    private void realizaLogout(HttpServletRequest resRequest, HttpServletResponse response) throws ServletException, IOException
+    {
+        
+        HttpSession session = resRequest.getSession();
+        session.invalidate();
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(resRequest, response);
+        
+    
     }
 }
