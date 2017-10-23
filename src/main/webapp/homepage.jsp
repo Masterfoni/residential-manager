@@ -8,7 +8,7 @@
         <meta name="author" content="">
         
         <link rel="user" href="imagens/user.jpg">
-        <link href="common/css/bootstrap.min.css" rel="stylesheet">
+        <link href="common/css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="./homepage.css">
         
         <title>GD</title>
