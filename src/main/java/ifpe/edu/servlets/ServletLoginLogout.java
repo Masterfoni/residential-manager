@@ -61,7 +61,7 @@ public class ServletLoginLogout extends HttpServlet {
             String mensagemErro = "Usuário não encontrado! Tem certeza que digitou seus dados corretamente?";
             request.setAttribute("errorMessage", mensagemErro);
             
-            reqDisp = request.getRequestDispatcher("/homepage.jsp");
+            reqDisp = request.getRequestDispatcher("/index.jsp");
             reqDisp.forward(request, response);
         }
     }
