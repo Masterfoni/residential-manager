@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -29,9 +30,10 @@
                 </li>
             </ul>
             <div>
-                <form class="botao_menu">
-                    <button class="btn btn-outline-default my-2 my-sm-0" type="submit">Sair</button>
-                </form>
+                <form action="ServletLoginLogout" method="post" class="botao_menu">  
+                    <input type="hidden" name="ACTION" value="LOGOUT"/>
+                    <input type="submit" value="logout"/>  
+                </form>  
             </div>
 
         </nav>
@@ -61,5 +63,4 @@
                 <p>&copy; DJ Company 2017</p>
             </div>
         </div> <!-- container-->
-    </body>
 </html>
