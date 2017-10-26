@@ -1,6 +1,6 @@
 package ifpe.edu.servlets;
 
-import handlers.UsuarioHandler;
+import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.entities.Usuario;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -21,7 +21,7 @@ public class ServletLoginLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        encaminhaSolicitacaoDefault(request, response);
     }
 
     @Override
@@ -39,7 +39,25 @@ public class ServletLoginLogout extends HttpServlet {
         }
         else
         {
-            //Requisições não esperadas, deve-se encaminhar para o index novamente com uma mensagem de erro! TODO
+            encaminhaSolicitacaoDefault(request, response);
+        }
+    }
+    
+    private void encaminhaSolicitacaoDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        RequestDispatcher reqDisp;
+        
+        if(session.getAttribute("userId") != null)
+        {
+            reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
+            reqDisp.forward(request, response);
+        }
+        else
+        {
+            reqDisp = request.getRequestDispatcher("/index/index.jsp");
+            request.setAttribute("errorMessage", "Por favor, realize o login no sistema.");
+            reqDisp.forward(request, response);
         }
     }
     
@@ -53,7 +71,7 @@ public class ServletLoginLogout extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("userId", usuario.getId());
             
-            reqDisp = request.getRequestDispatcher("/homepage.jsp");
+            reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }
         else
@@ -61,19 +79,16 @@ public class ServletLoginLogout extends HttpServlet {
             String mensagemErro = "Usuário não encontrado! Tem certeza que digitou seus dados corretamente?";
             request.setAttribute("errorMessage", mensagemErro);
             
-            reqDisp = request.getRequestDispatcher("/index.jsp");
+            reqDisp = request.getRequestDispatcher("/index/index.jsp");
             reqDisp.forward(request, response);
         }
     }
     
     private void realizaLogout(HttpServletRequest resRequest, HttpServletResponse response) throws ServletException, IOException
     {
-        
         HttpSession session = resRequest.getSession();
         session.invalidate();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index/index.jsp");
         dispatcher.forward(resRequest, response);
-        
-    
     }
 }
