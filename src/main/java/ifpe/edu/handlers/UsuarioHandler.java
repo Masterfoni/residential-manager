@@ -1,4 +1,4 @@
-package handlers;
+package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Usuario;
 import javax.ejb.Stateless;
