@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ifpe.edu.entities;
 
 import java.io.Serializable;
@@ -12,23 +7,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author DaniloP
- */
 @Entity
 @Table(name = "TB_APARTAMENTO")
+@NamedQueries({
+    @NamedQuery(name = "Apartamento.getApartamentos", query = "SELECT a FROM Apartamento a WHERE a.ocupado = 0")
+})
 public class Apartamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NotNull
     @OneToOne
     @JoinColumn(name="ID_USUARIO", referencedColumnName = "ID")
     private Usuario usuario;
@@ -40,6 +35,10 @@ public class Apartamento implements Serializable {
     @NotNull
     @Column(name = "NUM_ANDAR")
     private int andar;
+    
+    @NotNull
+    @Column (name="VF_OCUPADO")
+    protected int ocupado;
 
     public Long getId() {
         return id;
@@ -72,4 +71,12 @@ public class Apartamento implements Serializable {
     public void setAndar(int andar) {
         this.andar = andar;
     }    
+
+    public int getOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(int ocupado) {
+        this.ocupado = ocupado;
+    }
 }

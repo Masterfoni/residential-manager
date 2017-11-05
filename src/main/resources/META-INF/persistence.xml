@@ -6,6 +6,7 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create-or-extend-tables"/>
+      <!--<property name="javax.persistence.schema-generation.database.action" value="create"/>-->
       
       <property name="javax.persistence.validation.group.pre-persist" value="javax.validation.groups.Default"/>
       <property name="javax.persistence.validation.group.pre-update" value="javax.validation.groups.Default"/>

@@ -2,6 +2,7 @@ package ifpe.edu.servlets;
 
 import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.entities.Usuario;
+import ifpe.edu.handlers.ApartamentoHandler;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -18,10 +19,14 @@ public class ServletLoginLogout extends HttpServlet {
     @EJB
     UsuarioHandler usHandler;
     
+    @EJB
+    ApartamentoHandler apHandler;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        encaminhaSolicitacaoDefault(request, response);
+        request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
+        request.getRequestDispatcher("/index/index.jsp").forward(request, response);
     }
 
     @Override

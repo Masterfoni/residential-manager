@@ -4,9 +4,17 @@
         <servlet-name>ServletLoginLogout</servlet-name>
         <servlet-class>ifpe.edu.servlets.ServletLoginLogout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCadastro</servlet-name>
+        <servlet-class>ifpe.edu.servlets.ServletCadastro</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLoginLogout</servlet-name>
         <url-pattern>/ServletLoginLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCadastro</servlet-name>
+        <url-pattern>/ServletCadastro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,6 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/index/index.jsp</welcome-file>
+        <welcome-file>ServletLoginLogout</welcome-file>
     </welcome-file-list>
 </web-app>

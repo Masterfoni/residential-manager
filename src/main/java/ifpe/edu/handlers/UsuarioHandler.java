@@ -2,6 +2,7 @@ package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Usuario;
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,17 @@ public class UsuarioHandler {
     
     public UsuarioHandler() {
         
+    }
+    
+    public boolean insertUsuario(Usuario usuario)
+    {
+        try {
+            entityManager.persist(usuario);
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
     }
         
     public Usuario findUsuario(String login, String senha) 

@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="./index.css">
+        <link rel="stylesheet" type="text/css" href="index/index.css">
         
         <title>GD - Login</title>
     </head>
@@ -52,11 +52,10 @@
                                     <form id="register-form" action="SERVLET A SER IMPLEMENTADO" method="post" role="form" style="display: none;">
                                         <div class="form-group">
                                             <label for="selectApartamento">Escolha seu apartamento:</label>
-                                            <select class="form-control" id="selectApartamento">
-                                              <option>Apt 101</option>
-                                              <option>Apt 102</option>
-                                              <option>Apt 103</option>
-                                              <option>Apt 104</option>
+                                            <select class="form-control" id="selectApartamento" name="valApartamento">
+                                                <c:forEach items="${apartamentos}" var="ap">
+                                                    <option value="${ap.id}"><c:out value="${ap.numero}"/></option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -98,7 +97,8 @@
                 <h4 class="modal-title">Atenção</h4>
               </div>
               <div class="modal-body">
-                <p>${errorMessage}</p>
+                <p class="error">${errorMessage}</p>
+                <p class="success">${successMessage}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -119,9 +119,14 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <script src="./index.js"></script>
+        <script src="index/index.js"></script>
         
         <c:if test="${not empty errorMessage}">
+            <script>
+                $('#myModal').modal('toggle');
+            </script>
+        </c:if>
+        <c:if test="${not empty successMessage}">
             <script>
                 $('#myModal').modal('toggle');
             </script>
