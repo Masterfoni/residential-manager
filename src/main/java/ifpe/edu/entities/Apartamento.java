@@ -16,7 +16,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "TB_APARTAMENTO")
 @NamedQueries({
-    @NamedQuery(name = "Apartamento.getApartamentos", query = "SELECT a FROM Apartamento a WHERE a.ocupado = 0")
+    @NamedQuery(name = "Apartamento.getApartamentos", query = "SELECT a FROM Apartamento a WHERE a.ocupado = 0"),
+    @NamedQuery(name = "Apartamento.findById", query = "SELECT a FROM Apartamento a WHERE a.id = :id")
 })
 public class Apartamento implements Serializable {
 

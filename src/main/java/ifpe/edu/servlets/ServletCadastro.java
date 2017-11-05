@@ -1,6 +1,7 @@
 package ifpe.edu.servlets;
 
 import ifpe.edu.entities.Usuario;
+import ifpe.edu.handlers.ApartamentoHandler;
 import ifpe.edu.handlers.UsuarioHandler;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -16,6 +17,9 @@ public class ServletCadastro extends HttpServlet {
 
     @EJB
     UsuarioHandler usHandler;
+    
+    @EJB
+    ApartamentoHandler apHandler;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,6 +57,7 @@ public class ServletCadastro extends HttpServlet {
         novoUsuario.setSenha(request.getParameter("valSenha"));
         novoUsuario.setNome(request.getParameter("valNome"));
         novoUsuario.setRg(request.getParameter("valRg"));
+        novoUsuario.setSexo(request.getParameter("valSexo"));
         
         if(!novoUsuario.getSenha().equals(request.getParameter("valConfSenha")))
         {
@@ -60,7 +65,14 @@ public class ServletCadastro extends HttpServlet {
         }
         else
         {
-            sucesso = usHandler.insertUsuario(novoUsuario);
+            if(usHandler.insertUsuario(novoUsuario) > 0)
+            {
+                long apId = Long.decode(request.getParameter("valApartamento"));
+                
+                apHandler.setDonoApartamento(apId, novoUsuario); 
+            }
+            
+            sucesso = true;
         }
         
         return sucesso;

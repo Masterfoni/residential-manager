@@ -49,7 +49,7 @@
                                         </div>
                                         <input type="hidden" name="ACTION" value="LOGIN"/>
                                     </form>
-                                    <form id="register-form" action="SERVLET A SER IMPLEMENTADO" method="post" role="form" style="display: none;">
+                                    <form id="register-form" action="ServletCadastro" method="post" role="form" style="display: none;">
                                         <div class="form-group">
                                             <label for="selectApartamento">Escolha seu apartamento:</label>
                                             <select class="form-control" id="selectApartamento" name="valApartamento">
@@ -63,6 +63,19 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="valNome" tabindex="1" class="form-control" placeholder="Digite seu nome" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="selectSexo">Sexo:</label>
+                                            <select class="form-control" id="selectSexo" name="valSexo">
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Feminino">Feminino</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="valCpf" tabindex="1" class="cpf form-control" placeholder="Digite seu CPF" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="valRg" tabindex="1" class="rg form-control" placeholder="Digite seu RG" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="valSenha" id="password" tabindex="2" class="form-control" placeholder="Digite sua senha">
@@ -119,6 +132,7 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bootcss.com/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
         <script src="index/index.js"></script>
         
         <c:if test="${not empty errorMessage}">

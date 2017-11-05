@@ -1,6 +1,7 @@
 package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Apartamento;
+import ifpe.edu.entities.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,6 +17,17 @@ public class ApartamentoHandler {
     
     public ApartamentoHandler() {
         
+    }
+    
+    public void setDonoApartamento(long idApartamento, Usuario novoDono)
+    {
+        Apartamento apNovoDono = entityManager.createNamedQuery("Apartamento.findById", Apartamento.class)
+                                 .setParameter("id", idApartamento).getSingleResult();
+        
+        apNovoDono.setUsuario(novoDono);
+        apNovoDono.setOcupado(1);
+        
+        entityManager.merge(apNovoDono);
     }
     
     public List<Apartamento> getApartamentosDesocupados() 

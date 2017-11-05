@@ -8,12 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TB_TIPO_USUARIO")
 @Access(AccessType.FIELD)
+@NamedQueries({
+    @NamedQuery(name = "TipoUsuario.getCondomino", query = "SELECT tu FROM TipoUsuario tu WHERE tu.descricao = 'condomino'")
+})
 public class TipoUsuario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

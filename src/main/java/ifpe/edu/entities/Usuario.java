@@ -39,7 +39,6 @@ public class Usuario implements Serializable {
     @Column (name="TXT_SEXO")
     private String sexo;
     
-    @NotNull
     @OneToOne
     @JoinColumn(name="ID_TIPO_USUARIO", referencedColumnName = "ID")
     private TipoUsuario tipoUsuario;

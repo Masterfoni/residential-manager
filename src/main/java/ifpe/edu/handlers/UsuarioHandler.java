@@ -1,10 +1,9 @@
 package ifpe.edu.handlers;
 
+import ifpe.edu.entities.TipoUsuario;
 import ifpe.edu.entities.Usuario;
 import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Stateless
@@ -17,15 +16,31 @@ public class UsuarioHandler {
         
     }
     
-    public boolean insertUsuario(Usuario usuario)
+    public long insertUsuario(Usuario usuario)
     {
+        long idRetorno = 0;
+        TipoUsuario condomino = new TipoUsuario();
+        
         try {
-            entityManager.persist(usuario);
+            condomino = entityManager.createNamedQuery("TipoUsuario.getCondomino", TipoUsuario.class)
+                        .getSingleResult();
+            
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
         }
         
-        return true;
+        usuario.setTipoUsuario(condomino);
+        
+        try {
+            entityManager.persist(usuario);
+            entityManager.flush();
+            
+            idRetorno = usuario.getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return idRetorno;
     }
         
     public Usuario findUsuario(String login, String senha) 
@@ -34,7 +49,7 @@ public class UsuarioHandler {
         try {
             usuarioAchado = entityManager.createNamedQuery("Usuario.findByLoginSenha", Usuario.class)
                             .setParameter("login", login).setParameter("senha", senha).getSingleResult();
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }        
         
