@@ -56,7 +56,7 @@
     background: #87CEEB;
 }
 
-.container {
+.conteudo {
   width: auto;
   padding-right: 15px;
   padding-left: 15px;
@@ -67,6 +67,7 @@
   padding-bottom: 20px;
 
 }
+
 
 .info{
     text-align: center;
