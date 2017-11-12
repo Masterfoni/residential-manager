@@ -1,75 +1,100 @@
 
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        
-        <link rel="user" href="imagens/user.jpg">
-        <link href="common/css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="./homepage.css">
-        
-        <title>GD</title>
+
+        <title>Home Page</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="homepage/homepage.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bootcss.com/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+
     </head>
 
-    <body>  
-        <nav class="menu">
-            <ul>
-                <li> <a href="#">Home</a></li>
-                <li class="nav-item active"> <a href="#">Informativos <span class="sr-only">(current)</span></a></li>
-                <li> <a href="#">Ambientes</a>
-                    <ul>
-                        <li><a href="#">Reservas</a></li>
-                        <li><a href="#">Festividades</a></li>
-                    </ul>
-                </li>
-                <li> <a href="#">Visitas</a></li>
-                <li> <a href="#">Financeiro</a>
-                    <ul>
-                        <li><a href="#">Tranparência</a></li>
-                    </ul> 
-                </li>  
-                <li>
-                    <form action="ServletLoginLogout" method="post" >  
-                        <input type="hidden" name="ACTION" value="LOGOUT"/>
-                        <input class="botao_menu" type="submit" value="Sair">
-                    </form>  
-                </li>
-            </ul>
-        </nav>
-        <div class="content">
-            
-            <div class="conteudo">
-                <h1>Informativos</h1>
-                <p>O condomínio (em latim: condominium) ocorre quando existe um domínio de mais de uma pessoa simultaneamente de um determinado bem, ou partes de um bem.
-                    Tecnicamente, e segundo a legislação brasileira, temos expressa que a ideia do direito exercido por mais de uma pessoa sobre o mesmo objeto. No Brasil tem-se o condomínio, quando a mesma coisa pertence a mais de uma pessoa, e todas envolvidas têm igual direito, de forma ideal, sobre o todo e cada uma de suas partes. Sendo assim, o poder jurídico atribuído a todos na sua integralidade. Cada condômino tem assegurada uma fração, ou quota da coisa.
-                    No direito português, expressa uma ideia um pouco diferente, qualificando uma situação em que determinadas parcelas de um objeto são regidas por direitos de propriedade autónomos, o que implica que os diversos titulares desses direitos tenham de conviver e contribuir nas despesas necessárias para a manutenção de parcelas que são, sem outra alternativa, usadas em comum. Na vida encontramos diversas situações em que duas ou mais pessoas têm posse ou propriedade sobre o mesmo bem.
-                    De acordo com a constituição o condomínio pode ser convencional ou incidental. Enquanto o primeiro nasce do contrato de duas ou mais pessoas que usam a coisa em comum, o último também dito eventual nasce não da vontade das partes envolvidas, mas de uma circunstância qualquer, como por exemplo da sucessão hereditária, ou dos direitos de vizinhança. Temos ainda o legal ou forçado quando nasce da imposição direta do ordenamento jurídico.[1]</p>
-             
-                    <div class="row">
-                    <div class="col-md-4">
-                        <h2>Reunião do Condomínio</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                    </div>
-                    <div class="col-md-4">
-                        <h2>Festa Natalina</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                    </div>
+    <body class="body">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark navbar-inverse fixed-top" style="background-color: #00BFFF">
+                <a class="navbar-brand" href="#">Gerenciador de Condomínios</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div class="col-md-4">
-                        <h2>Reforma</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" class="navbar-brand"href="#">Informativos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Transparência</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Visitas</a>
+                        </li>
+                    </ul>
+                    <div>
+                        <form class="form-inline my-2 my-lg-0" action="ServletLoginLogout" method="post" >  
+                            <input type="hidden" name="ACTION" value="LOGOUT"/>
+                            <input class="btn btn-info" type="submit" value="Sair">
+                        </form>     
                     </div>
                 </div>
-            </div>
-        
-            <div class="footer">
-                <p>&copy; DJ Company 2017</p>
-            </div>
-        </div> <!-- contant-->
+            </nav>
+
+            <main role="main">
+
+                <div class="jumbotron">
+                    <h1 class="display-3">Bem vindo</h1>
+                    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                </div>
+
+                <div class="row marketing">
+                    <div class="col-lg-6">
+                        <h4>Subheading</h4>
+                        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <h4>Subheading</h4>
+                        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                    </div>
+                </div>
+
+            </main>
+
+
+        </div>
+
+    </body> 
 </html>

@@ -10,7 +10,10 @@
     font-size: 20px;
     background-color: #1E90FF;
 }
-
+.body{
+    
+    background-color: #6633ff;
+}
 .menu ul{
     list-style: none;
     position: relative;
@@ -53,20 +56,16 @@
     background: #87CEEB;
 }
 
-.content {
+.container {
   width: auto;
-  padding-right: auto;
-  padding-left: auto;
-  margin-right: 15%;
-  margin-left: 15%;
-  background: #DCDCDC;
-  text-align: center;
-  padding-bottom: 0px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  margin-top: 55px;
+  padding-bottom: 20px;
 
-}
-.conteudo{
-    padding-bottom: 165px; 
-    margin: 0px;
 }
 
 .info{
