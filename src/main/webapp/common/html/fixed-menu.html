@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                <a class="navbar-brand" href="#">Gerenciador de Condominios</a>
+            </div>
+            <div id="theNavbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class=" dropdown">
+                        <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informativos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class=" dropdown">
+                                <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visualizar Informativos</a>
+                            </li>
+                            <li><a href="#">Publicar Informativo</a></li>
+                        </ul>
+                    </li>
+                    <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portal de Transparencia <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Visualizar Transparencia</a></li>
+                            <li><a href="#">Adicionar Transparencia</a></li>
+                        </ul>
+                    </li>
+                    <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reservas <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Gerenciar Reservas</a></li>
+                            <li><a href="#">Realizar Reserva</a></li>
+                            <li><a href="#">Visualizar Reserva</a></li>
+                        </ul>
+                    </li>
+                    <li class=" down"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Registrar Visita</a></li>
+                            <li><a href="#">Gerenciar Visitas</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form pull-right" action="ServletLoginLogout" method="post">  
+                    <input type="hidden" name="ACTION" value="LOGOUT"/>
+                    <button class="btn btn-link" type="submit">Sair <span class="glyphicon glyphicon-log-out"></span></button>
+                </form>  
+            </div>
+        </div>
+    </nav>
+</html>
