@@ -56,7 +56,6 @@ public class ServletCadastro extends HttpServlet {
         novoUsuario.setLogin(request.getParameter("valLogin"));
         novoUsuario.setSenha(request.getParameter("valSenha"));
         novoUsuario.setNome(request.getParameter("valNome"));
-        novoUsuario.setRg(request.getParameter("valRg"));
         novoUsuario.setSexo(request.getParameter("valSexo"));
         
         if(!novoUsuario.getSenha().equals(request.getParameter("valConfSenha")))

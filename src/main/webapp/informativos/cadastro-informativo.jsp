@@ -28,6 +28,12 @@
             
             <script>
                 CKEDITOR.replace('editor1');
+                
+                $('#ckeditorForm').submit(function () {
+                   
+                   return true;
+                });
+
             </script>
 	</div>
     </body>

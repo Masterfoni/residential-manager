@@ -55,4 +55,19 @@ public class UsuarioHandler {
         
         return usuarioAchado;
     }
+    
+    public Usuario findUsuario(Long id)
+    {
+        Usuario usuarioAchado = null;
+        
+        try {
+            usuarioAchado = entityManager.createNamedQuery("Usuario.findById", Usuario.class)
+                            .setParameter("id", id).getSingleResult();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return usuarioAchado;
+    }
 }

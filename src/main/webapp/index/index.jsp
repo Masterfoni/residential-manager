@@ -75,9 +75,6 @@
                                             <input type="text" name="valCpf" tabindex="1" class="cpf form-control" placeholder="Digite seu CPF" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="valRg" tabindex="1" class="rg form-control" placeholder="Digite seu RG" value="">
-                                        </div>
-                                        <div class="form-group">
                                             <input type="password" name="valSenha" id="password" tabindex="2" class="form-control" placeholder="Digite sua senha">
                                         </div>
                                         <div class="form-group">

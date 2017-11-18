@@ -8,14 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+
 @Entity
 @Table(name = "TB_INFORMATIVO")
+@NamedQueries({
+    @NamedQuery(name = "Informativo.findById", query = "SELECT i FROM Informativo i WHERE i.id = :id")
+})
 public class Informativo implements Serializable {
 
     @Id

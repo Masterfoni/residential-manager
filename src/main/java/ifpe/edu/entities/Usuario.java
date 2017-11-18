@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull;
 @Table(name="TB_USUARIO")
 @Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findByLoginSenha", query = "SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha")
+    @NamedQuery(name = "Usuario.findByLoginSenha", query = "SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u Where u.id = :id")
 })
 public class Usuario implements Serializable {
     @Id
@@ -30,10 +31,6 @@ public class Usuario implements Serializable {
     @NotNull
     @Column (name="TXT_CPF", unique=true)
     private String cpf;
-
-    @NotNull
-    @Column (name="TXT_RG", unique=true)
-    private String rg;
 
     @NotNull
     @Column (name="TXT_SEXO")
@@ -65,14 +62,6 @@ public class Usuario implements Serializable {
 
     public void setCpf(String cpf) {
             this.cpf = cpf;
-    }
-
-    public String getRg() {
-            return rg;
-    }
-
-    public void setRg(String rg) {
-            this.rg = rg;
     }
 
     public String getSexo() {
