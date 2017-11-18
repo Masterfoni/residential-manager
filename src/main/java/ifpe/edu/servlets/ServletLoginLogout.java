@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet
+@WebServlet( urlPatterns = {"/ServletLoginLogout", "/informativos/ServletLoginLogout"})
 public class ServletLoginLogout extends HttpServlet {
 
     @EJB
@@ -25,8 +25,7 @@ public class ServletLoginLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
-        request.getRequestDispatcher("/index/index.jsp").forward(request, response);
+        encaminhaSolicitacaoDefault(request, response);
     }
 
     @Override
@@ -60,8 +59,10 @@ public class ServletLoginLogout extends HttpServlet {
         }
         else
         {
-            reqDisp = request.getRequestDispatcher("/index/index.jsp");
+            request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             request.setAttribute("errorMessage", "Por favor, realize o login no sistema.");
+            
+            reqDisp = request.getRequestDispatcher("/index/index.jsp");
             reqDisp.forward(request, response);
         }
     }
@@ -75,6 +76,10 @@ public class ServletLoginLogout extends HttpServlet {
         {
             HttpSession session = request.getSession();
             session.setAttribute("userId", usuario.getId());
+            session.setAttribute("userType", usuario.getTipoUsuario().getId());
+            
+            System.out.println("ID DO USUARIO: " + usuario.getId());
+            System.out.println("ID DO TIPO DO USUARIO: " + usuario.getTipoUsuario().getId());
             
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
@@ -93,7 +98,8 @@ public class ServletLoginLogout extends HttpServlet {
     {
         HttpSession session = resRequest.getSession();
         session.invalidate();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index/index.jsp");
+        
+        RequestDispatcher dispatcher = resRequest.getRequestDispatcher("/index/index.jsp");
         dispatcher.forward(resRequest, response);
     }
 }

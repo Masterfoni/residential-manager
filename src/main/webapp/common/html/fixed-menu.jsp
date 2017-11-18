@@ -1,5 +1,15 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
+    <style>
+        a:hover {
+            cursor: pointer;
+        }
+    </style>
+    
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,9 +27,13 @@
                         <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informativos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class=" dropdown">
-                                <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visualizar Informativos</a>
+                                <a onclick="encaminhaRequisicao('VINFORMATIVO')" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visualizar Informativos</a>
                             </li>
-                            <li><a href="#">Publicar Informativo</a></li>
+                            <c:if test="${sessionScope.userType == 2}">
+                                <li>
+                                    <a onclick="encaminhaRequisicao('CINFORMATIVO')">Publicar Informativo</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </li>
                     <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portal de Transparencia <span class="caret"></span></a>
@@ -49,4 +63,23 @@
             </div>
         </div>
     </nav>
+    
+    <script>
+        function encaminhaRequisicao(valorRequisicao) {
+        var form = document.createElement("form");
+        var inputPagina = document.createElement("input"); 
+
+        form.method = "POST";
+        form.action = "ServletEncaminhador";   
+
+        inputPagina.value = valorRequisicao;
+        inputPagina.name = "ACTION";
+        
+        form.appendChild(inputPagina);  
+
+        document.body.appendChild(form);
+
+        form.submit();
+        }
+    </script>
 </html>
