@@ -25,18 +25,40 @@
                 </textarea>
                 <input type="submit" class="iButton btn btn-success" value="Publicar">
             </form>
-            
-            <script>
-                CKEDITOR.replace('editor1');
-                
-                $('#ckeditorForm').submit(function () {
-                   
-                   return true;
-                });
-            </script>
 	</div>
+        
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Atenção</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error">Você precisa digitar algum conteúdo para publicar o informativo!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+        <script>
+            CKEDITOR.replace('editor1');
+
+            $('#ckeditorForm').submit(function () {
+               if(!CKEDITOR.instances.editor1.getData())
+               {
+                   $('#myModal').modal('toggle');
+                   return false;
+               }
+
+               return true;
+            });
+        </script>
     </body>
 </html>
