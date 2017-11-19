@@ -23,7 +23,7 @@
                 <textarea name="editor1" id="editor1" rows="20" cols="80">
                     Digite aqui o informativo que você deseja publicar.
                 </textarea>
-                <input type="submit" class="form-control btn btn-register" value="Publicar">
+                <input type="submit" class="iButton btn btn-success" value="Publicar">
             </form>
             
             <script>
@@ -33,8 +33,10 @@
                    
                    return true;
                 });
-
             </script>
 	</div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
     </body>
 </html>

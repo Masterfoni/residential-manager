@@ -1,3 +1,20 @@
 #ckeditorForm {
-    margin: 10% auto;
+    margin: auto;
+    
+    margin-top: 3%;
+    
+    margin-left: 8%;
+    margin-right: 8%;
+    
+    text-align: center;
+    
+}
+
+#cke_1_top, #cke_1_bottom {
+    background-color: #aa8cc5;
+}
+
+.iButton {
+    margin: 10px auto;
+    width: 80%;
 }

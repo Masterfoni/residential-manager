@@ -1,6 +1,8 @@
 package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Informativo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,6 +33,20 @@ public class InformativoHandler {
         }
         
         return sucesso;
+    }
+    
+    public List<Informativo> getInformativos() {
+        List<Informativo> informativosAchados = new ArrayList<Informativo>();
+        
+        try {
+            informativosAchados = entityManager
+                                  .createNamedQuery("Informativo.getInformativos", Informativo.class)
+                                  .getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return informativosAchados;
     }
         
     public Informativo findInformativo(Long id) 

@@ -1,3 +1,8 @@
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; 
+}
+
 html {
     height: 100%;
 }
@@ -20,4 +25,19 @@ body {
     box-shadow: 5px 5px 15px #312f2f;
     
     background-color: whitesmoke;
+    
+    overflow-y: scroll;
 }
+
+p.success {
+    border-left: green solid;
+    border-left-width: 10px;
+    padding-left: 10px;
+}
+
+p.error {
+    border-left: red solid;
+    border-left-width: 10px;
+    padding-left: 10px;
+}
+

@@ -20,7 +20,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "TB_INFORMATIVO")
 @NamedQueries({
-    @NamedQuery(name = "Informativo.findById", query = "SELECT i FROM Informativo i WHERE i.id = :id")
+    @NamedQuery(name = "Informativo.findById", query = "SELECT i FROM Informativo i WHERE i.id = :id"),
+    @NamedQuery(name = "Informativo.getInformativos", query = "SELECT i FROM Informativo i ORDER BY i.dataCriacao")
 })
 public class Informativo implements Serializable {
 

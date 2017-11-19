@@ -3,6 +3,7 @@ package ifpe.edu.servlets;
 import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.entities.Usuario;
 import ifpe.edu.handlers.ApartamentoHandler;
+import ifpe.edu.handlers.InformativoHandler;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -21,6 +22,9 @@ public class ServletLoginLogout extends HttpServlet {
     
     @EJB
     ApartamentoHandler apHandler;
+    
+    @EJB
+    InformativoHandler inforHandler;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -54,6 +58,7 @@ public class ServletLoginLogout extends HttpServlet {
         
         if(session.getAttribute("userId") != null)
         {
+            session.setAttribute("inforList", inforHandler.getInformativos());
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }
@@ -75,8 +80,10 @@ public class ServletLoginLogout extends HttpServlet {
         if(usuario != null) 
         {
             HttpSession session = request.getSession();
+            
             session.setAttribute("userId", usuario.getId());
             session.setAttribute("userType", usuario.getTipoUsuario().getId());
+            session.setAttribute("inforList", inforHandler.getInformativos());
             
             System.out.println("ID DO USUARIO: " + usuario.getId());
             System.out.println("ID DO TIPO DO USUARIO: " + usuario.getTipoUsuario().getId());
