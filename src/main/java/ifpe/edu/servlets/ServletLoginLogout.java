@@ -64,10 +64,10 @@ public class ServletLoginLogout extends HttpServlet {
         }
         else
         {
-            request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             request.setAttribute("errorMessage", "Por favor, realize o login no sistema.");
             
             reqDisp = request.getRequestDispatcher("/index/index.jsp");
+            request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             reqDisp.forward(request, response);
         }
     }
@@ -96,7 +96,9 @@ public class ServletLoginLogout extends HttpServlet {
             String mensagemErro = "Usuário não encontrado! Tem certeza que digitou seus dados corretamente?";
             request.setAttribute("errorMessage", mensagemErro);
             
+            
             reqDisp = request.getRequestDispatcher("/index/index.jsp");
+            request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             reqDisp.forward(request, response);
         }
     }
@@ -107,6 +109,7 @@ public class ServletLoginLogout extends HttpServlet {
         session.invalidate();
         
         RequestDispatcher dispatcher = resRequest.getRequestDispatcher("/index/index.jsp");
+        resRequest.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
         dispatcher.forward(resRequest, response);
     }
 }

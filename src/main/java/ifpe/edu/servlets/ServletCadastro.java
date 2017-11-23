@@ -1,5 +1,6 @@
 package ifpe.edu.servlets;
 
+import ifpe.edu.utils.LongRequestResult;
 import ifpe.edu.entities.Usuario;
 import ifpe.edu.handlers.ApartamentoHandler;
 import ifpe.edu.handlers.UsuarioHandler;
@@ -32,23 +33,29 @@ public class ServletCadastro extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher reqDisp;
         
-        if(cadastrarUsuario(request, response))
+        LongRequestResult resultadoCadastro;
+        
+        resultadoCadastro = cadastrarUsuario(request, response);
+        
+        if(!resultadoCadastro.hasErrors)
         {
             reqDisp = request.getRequestDispatcher("/index/index.jsp");
             request.setAttribute("successMessage", "Cadastro realizado com sucesso!");
+            request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             reqDisp.forward(request, response);
         }
         else
         {
             reqDisp = request.getRequestDispatcher("/index/index.jsp");
-            request.setAttribute("errorMessage", "Houveram problemas no cadastro, revise seus dados.");
+            request.setAttribute("errorMessage", resultadoCadastro.message);
+            request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             reqDisp.forward(request, response);
         }
     }
     
-    private boolean cadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
+    private LongRequestResult cadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
     {
-        Boolean sucesso;
+        LongRequestResult resultado = new LongRequestResult();
         
         Usuario novoUsuario = new Usuario();
         
@@ -60,20 +67,20 @@ public class ServletCadastro extends HttpServlet {
         
         if(!novoUsuario.getSenha().equals(request.getParameter("valConfSenha")))
         {
-            sucesso = false;
+            resultado.hasErrors = true;
+            resultado.message = "Valor das senhas não confere!";
         }
         else
         {
-            if(usHandler.insertUsuario(novoUsuario) > 0)
+            resultado = usHandler.insertUsuario(novoUsuario);
+            
+            if(!resultado.hasErrors)
             {
                 long apId = Long.decode(request.getParameter("valApartamento"));
-                
-                apHandler.setDonoApartamento(apId, novoUsuario); 
+                apHandler.setDonoApartamento(apId, novoUsuario);
             }
-            
-            sucesso = true;
         }
         
-        return sucesso;
+        return resultado;
     }
 }

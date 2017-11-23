@@ -2,13 +2,19 @@ package ifpe.edu.handlers;
 
 import ifpe.edu.entities.TipoUsuario;
 import ifpe.edu.entities.Usuario;
+import ifpe.edu.utils.LongRequestResult;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 @Stateless
 public class UsuarioHandler {
-
+    
     @PersistenceContext(name = "resmanager") 
     private EntityManager entityManager;
     
@@ -16,9 +22,12 @@ public class UsuarioHandler {
         
     }
     
-    public long insertUsuario(Usuario usuario)
+    public LongRequestResult insertUsuario(Usuario usuario)
     {
-        long idRetorno = 0;
+        LongRequestResult resultado = new LongRequestResult();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        
         TipoUsuario condomino = new TipoUsuario();
         
         try {
@@ -26,21 +35,39 @@ public class UsuarioHandler {
                         .getSingleResult();
             
         } catch (Exception e) {
+            resultado.hasErrors = true;
+            resultado.message = "Não foi possível buscar o tipo de usuário específico. Detalhes: " + e.getMessage();
             e.printStackTrace();
         }
         
-        usuario.setTipoUsuario(condomino);
-        
-        try {
-            entityManager.persist(usuario);
-            entityManager.flush();
+        if(!resultado.hasErrors)
+        {
+            usuario.setTipoUsuario(condomino);
             
-            idRetorno = usuario.getId();
-        } catch (Exception e) {
-            e.printStackTrace();
+            Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
+
+            if(violations.size() <= 0)
+            {
+                try {
+
+                    entityManager.persist(usuario);
+                    entityManager.flush();
+
+                    resultado.Data.add(usuario.getId());
+                } catch (Exception e) {
+                    resultado.hasErrors = true;
+                    resultado.message = e.getMessage();
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                resultado.hasErrors = true;
+                resultado.message = violations.iterator().next().getMessage();
+            }
         }
-        
-        return idRetorno;
+            
+        return resultado;
     }
         
     public Usuario findUsuario(String login, String senha) 

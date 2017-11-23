@@ -3,6 +3,7 @@ package ifpe.edu.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="TB_USUARIO")
@@ -16,19 +17,19 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     protected Long id;
     
-    @NotNull
+    @NotBlank(message = "Você deve preencher o campo de nome!")
     @Column (name="TXT_NOME")
     private String nome;
 
-    @NotNull
+    @NotBlank(message = "Você deve preencher o campo de login!")
     @Column(name="TXT_LOGIN", unique = true)
     private String login;
 
-    @NotNull
+    @NotBlank(message = "Você deve preencher o campo de senha!")
     @Column (name="TXT_SENHA")
     private String senha;
 
-    @NotNull
+    @NotBlank(message = "Você deve preencher o campo de CPF!")
     @Column (name="TXT_CPF", unique=true)
     private String cpf;
 
