@@ -37,11 +37,7 @@ public class Visita implements Serializable {
     @NotNull
     @Column(name="TXT_CPF")
     private String cpf;
-    
-    @NotNull
-    @Column(name="TXT_DESCRICAO")
-    private String descricao;
-    
+
     @OneToOne
     @JoinColumn(name="ID_USUARIO", referencedColumnName="ID")
     private Usuario usuario;
@@ -73,15 +69,7 @@ public class Visita implements Serializable {
     public void setCpf(String cpf){
         this.cpf = cpf;
     }
-
-    public String getDescricao(){
-        return descricao;
-    }
     
-    public void setDescricao(String descricao){
-        this.descricao = descricao;
-    }
- 
     public Usuario getUsuario(){
         return usuario;
     }

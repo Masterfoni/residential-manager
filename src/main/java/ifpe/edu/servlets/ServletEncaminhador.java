@@ -1,6 +1,7 @@
 package ifpe.edu.servlets;
 
 import ifpe.edu.handlers.InformativoHandler;
+import ifpe.edu.handlers.VisitaHandler;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -48,6 +49,19 @@ public class ServletEncaminhador extends HttpServlet {
         {
             request.setAttribute("errorMessage", "");
             request.setAttribute("successMessage", "");
+            
+            reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
+            reqDisp.forward(request, response);
+        }
+        if(action.equals("RVISITA"))
+        {
+            reqDisp = request.getRequestDispatcher("/visitas/cadastro-visitas.jsp");
+            reqDisp.forward(request, response);
+        }
+        else if(action.equals("GVISITA"))
+        {
+            request.setAttribute("errorMessage", "");
+            request.setAttribute("sucessMessage", "");
             
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);

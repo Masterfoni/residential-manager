@@ -49,10 +49,12 @@
                             <li><a href="#">Visualizar Reserva</a></li>
                         </ul>
                     </li>
-                    <li class=" down"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Registrar Visita</a></li>
-                            <li><a href="#">Gerenciar Visitas</a></li>
+                            <li><a onclick="encaminhaRequisicao('RVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Registrar Visita</a>
+                            </li>
+                            <li><a onclick="encaminhaRequisicao('GVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Gerenciar Visitas</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
