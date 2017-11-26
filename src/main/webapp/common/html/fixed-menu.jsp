@@ -9,7 +9,7 @@
             cursor: pointer;
         }
     </style>
-    
+
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -18,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                  </button>
+                </button>
                 <a class="navbar-brand" href="#">Gerenciador de Condominios</a>
             </div>
             <div id="theNavbar" class="navbar-collapse collapse">
@@ -51,9 +51,13 @@
                     </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a onclick="encaminhaRequisicao('RVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Registrar Visita</a>
-                            </li>
-                            <li><a onclick="encaminhaRequisicao('GVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Gerenciar Visitas</a>
+                            <c:if test="${sessionScopeUserType !=3}">
+                                <li>
+                                    <a onclick="encaminhaRequisicao('RVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Registrar Visita</a>
+                                </li>
+                            </c:if>
+                            <li>
+                                <a onclick="encaminhaRequisicao('GVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Gerenciar Visitas</a>
                             </li>
                         </ul>
                     </li>
@@ -65,23 +69,23 @@
             </div>
         </div>
     </nav>
-    
+
     <script>
         function encaminhaRequisicao(valorRequisicao) {
-        var form = document.createElement("form");
-        var inputPagina = document.createElement("input"); 
+            var form = document.createElement("form");
+            var inputPagina = document.createElement("input");
 
-        form.method = "POST";
-        form.action = "ServletEncaminhador";   
+            form.method = "POST";
+            form.action = "ServletEncaminhador";
 
-        inputPagina.value = valorRequisicao;
-        inputPagina.name = "ACTION";
-        
-        form.appendChild(inputPagina);  
+            inputPagina.value = valorRequisicao;
+            inputPagina.name = "ACTION";
 
-        document.body.appendChild(form);
+            form.appendChild(inputPagina);
 
-        form.submit();
+            document.body.appendChild(form);
+
+            form.submit();
         }
     </script>
 </html>

@@ -66,7 +66,7 @@ public class ServletVisita extends HttpServlet {
             
             session.setAttribute("visitaList", vsHandler.getVisita());
             
-            reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
+            reqDisp = request.getRequestDispatcher("/visitas/gerenciar-visitas.jsp");
             reqDisp.forward(request, response);
         }
         
