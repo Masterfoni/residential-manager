@@ -4,9 +4,25 @@
         <servlet-name>ServletCadastro</servlet-name>
         <servlet-class>ifpe.edu.servlets.ServletCadastro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletVisita</servlet-name>
+        <servlet-class>ifpe.edu.servlets.ServletVisita</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VisitaHandler</servlet-name>
+        <servlet-class>ifpe.edu.handlers.VisitaHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCadastro</servlet-name>
         <url-pattern>/ServletCadastro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVisita</servlet-name>
+        <url-pattern>/ServletVisita</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisitaHandler</servlet-name>
+        <url-pattern>/VisitaHandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
