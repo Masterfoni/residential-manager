@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="visitas/cadastro-visitas.css">
 
     </head>
-    <body>
+    <body class="visitas">
         <%@include  file="../common/html/fixed-menu.jsp" %>
 
         <div class="container">

@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Gerenciar Visitas</title>
         <%@include file="../common/html/header-libs.html"%>
-        <link rel="stylesheet" type="text/css" href="visitas/visitas.css">
+        <link rel="stylesheet" type="text/css" href="visitas/cadastro-visitas.css">
     </head>
 
     <body style="background-color: white;">
@@ -20,6 +20,7 @@
                     <h2>Não Existem Visitas Cadastradas!</h2>
                 </div>
             </c:if>
+            <div class="tabela">
             <c:forEach items="${visitaList}" var="visita">
                 <div data-toggle="tooltip"
                      title="Visita Cadastrada às: ${visita.getDataCriacao()}">

@@ -1,12 +1,27 @@
 .panel-login {
-    margin-top: 10%;
+    
     border-color: #ccc;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     box-shadow: 5px 5px 15px #312f2f;
+    
+    margin: auto;
+    margin-top: 20%;
+    margin-left: 8%;
+    margin-right: 8%;
+    text-align: center;
 }
 
 .visitas{
     background-color: whitesmoke;
+}
+
+.tabela{
+    margin: auto;
+    margin-top: 5%;
+    margin-left: 8%;
+    margin-right: 8%;
+    text-align: center;
+    
 }
 
