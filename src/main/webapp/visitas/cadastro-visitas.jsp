@@ -9,35 +9,39 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <%@include file="../common/html/header-libs.html"%>
+        <link rel="stylesheet" type="text/css" href="visitas/cadastro-visitas.css">
+
     </head>
     <body>
         <%@include  file="../common/html/fixed-menu.jsp" %>
 
         <div class="container">
-            <h1>Cadastre Sua Visita</h1>
-
-            <div class="panel-body">
-                <div>
-                    <form id="visita-form" action="ServletVisita" method="post" role="form" style="display: block;">
-                        <div class="form-group">
-                            <div>
-                                <input type="text" name="valNome" id="visitanome" tabindex="1" class="form-control"
-                                       placeholder="Digite o Nome da Visita" value="">
+            <div class="panel panel-login">
+                <div class="panel-body">                     
+                    <div class="col-lg-6 col-md-offset-3">
+                        <h3>Cadastre Sua Visita</h3>
+                        <form id="visita-form" action="ServletVisita" method="post" role="form" style="display: block;">
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" name="valNome" id="visitanome" tabindex="1" class="form-control"
+                                           placeholder="Digite o Nome da Visita" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <input type="text" name="valCpf" tabindex="1" class="cpf form-control"
-                                       placeholder="Cpf" value="">
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" name="valCpf" tabindex="1" class="cpf form-control"
+                                           placeholder="cpf" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-md-offset-3">
-                                <input type="submit" class="btn btn-success" value="Registrar">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-md-offset-3">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar Visita</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>  
                 </div>
             </div>
         </div>
