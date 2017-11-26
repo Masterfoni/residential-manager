@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -29,8 +30,8 @@ public class Informativo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NotNull
-    @Column (name ="TXT_DESCRICAO")
+    @NotBlank(message = "Descrição deve ser informada!")
+    @Column (name ="TXT_DESCRICAO", length = 9999)
     protected  String descricao;
     
     @OneToOne
@@ -65,7 +66,7 @@ public class Informativo implements Serializable {
         return usuario;
     }
 
-    public void setUsuarioId(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
     

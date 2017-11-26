@@ -10,7 +10,7 @@
         }
     </style>
     
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">
@@ -56,7 +56,16 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form pull-right" action="ServletLoginLogout" method="post">  
+                <form class="navbar-form pull-right" action="ServletLoginLogout" method="post">
+                    <c:if test="${sessionScope.userType == 1}">
+                        <img alt="Perfil" width="35" height="35" src="common/assets/avatar-condomino.png">
+                    </c:if>
+                    <c:if test="${sessionScope.userType == 2}">
+                        <img alt="Perfil" width="35" height="35" src="common/assets/avatar-sindico.png">
+                    </c:if>
+                    <c:if test="${sessionScope.userType == 3}">
+                        <img alt="Perfil" width="35" height="35" src="common/assets/avatar-funcionario.png">
+                    </c:if>
                     <input type="hidden" name="ACTION" value="LOGOUT"/>
                     <button class="btn btn-link" type="submit">Sair <span class="glyphicon glyphicon-log-out"></span></button>
                 </form>  
@@ -66,20 +75,20 @@
     
     <script>
         function encaminhaRequisicao(valorRequisicao) {
-        var form = document.createElement("form");
-        var inputPagina = document.createElement("input"); 
+            var form = document.createElement("form");
+            var inputPagina = document.createElement("input"); 
 
-        form.method = "POST";
-        form.action = "ServletEncaminhador";   
+            form.method = "POST";
+            form.action = "ServletEncaminhador";   
 
-        inputPagina.value = valorRequisicao;
-        inputPagina.name = "ACTION";
-        
-        form.appendChild(inputPagina);  
+            inputPagina.value = valorRequisicao;
+            inputPagina.name = "ACTION";
 
-        document.body.appendChild(form);
+            form.appendChild(inputPagina);  
 
-        form.submit();
+            document.body.appendChild(form);
+
+            form.submit();
         }
     </script>
 </html>

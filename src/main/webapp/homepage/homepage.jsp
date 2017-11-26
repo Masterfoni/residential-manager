@@ -25,8 +25,9 @@
                 </div>
             </c:if>
             <c:forEach items="${inforList}" var="informativo">
-                <div class="main-informativo" data-toggle="tooltip" 
+                <div class="main-informativo" data-toggle="tooltip" data-placement="right"
                      title="Este informativo foi adicionado às: ${informativo.getDataCriacao()}">
+                    <button type="button" class="close" onclick="deletaInformativo(this, ${informativo.getId()})">&times;</button>
                     <div class="container-informativo">
                         ${informativo.getDescricao()}
                     </div>
@@ -70,6 +71,17 @@
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip(); 
             });
+            
+            function deletaInformativo(element, id) {
+                $.get("ServletInformativo", { deleteId: id }, function(response) {
+                    var convertedResponse = JSON.parse(response);
+                    if(convertedResponse.Success) {
+                        element.parentElement.parentElement.removeChild(element.parentElement);
+                    } else {
+                        alert("Ocorreu um problema ao deletar o informativo");
+                    }
+                });
+            }
         </script>
     </body> 
 </html>

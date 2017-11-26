@@ -11,6 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -29,7 +30,7 @@ public class Apartamento implements Serializable {
     @JoinColumn(name="ID_USUARIO", referencedColumnName = "ID")
     private Usuario usuario;
     
-    @NotNull
+    @Min(1)
     @Column(name = "NUM_NUMERO")
     private int numero;
     

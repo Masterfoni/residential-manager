@@ -1,11 +1,15 @@
 package ifpe.edu.servlets;
 
+import com.google.gson.Gson;
 import ifpe.edu.entities.Informativo;
 import ifpe.edu.entities.Usuario;
 import ifpe.edu.handlers.InformativoHandler;
 import ifpe.edu.handlers.UsuarioHandler;
+import ifpe.edu.utils.BoolRequestResult;
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,6 +31,19 @@ public class ServletInformativo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Long idToDelete = Long.parseLong(request.getParameter("deleteId"));
+        
+        BoolRequestResult resultado = infoHandler.deleteInformativo(idToDelete);
+        
+        Map<String, String> options = new LinkedHashMap<>();
+        options.put("Success", ""+resultado.data);
+        
+        
+        String json = new Gson().toJson(options);
+
+        response.setContentType("text/plain");  
+        response.setCharacterEncoding("UTF-8"); 
+        response.getWriter().write(json);
     }
     
     @Override
@@ -45,7 +62,7 @@ public class ServletInformativo extends HttpServlet {
 
             Informativo novoInformativo = new Informativo();
             novoInformativo.setDescricao(request.getParameter("editor1"));
-            novoInformativo.setUsuarioId(atualUsuario);
+            novoInformativo.setUsuario(atualUsuario);
             novoInformativo.setDataCriacao(dataAtual);
 
             if(infoHandler.insertInformativo(novoInformativo))
