@@ -17,8 +17,11 @@ import javax.validation.constraints.NotNull;
 @Table(name="TB_TIPO_USUARIO")
 @Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "TipoUsuario.getCondomino", query = "SELECT tu FROM TipoUsuario tu WHERE tu.descricao = 'condomino'")
+    @NamedQuery(name = "TipoUsuario.getCondomino", query = "SELECT tu FROM TipoUsuario tu WHERE tu.descricao = 'condomino'"),
+    @NamedQuery(name = "TipoUSuario.findTipoById", query = "SELECT tu FROM TipoUsuario tu WHERE tu.id = :id"),
+    @NamedQuery(name = "TipoUSuario.getTiposUsuario", query = "SELECT tu FROM TipoUsuario tu")
 })
+
 public class TipoUsuario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

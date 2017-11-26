@@ -9,8 +9,7 @@
             cursor: pointer;
         }
     </style>
-
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">
@@ -51,7 +50,7 @@
                     </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <c:if test="${sessionScopeUserType !=3}">
+                            <c:if test="${sessionScope.userType !=3}">
                                 <li>
                                     <a onclick="encaminhaRequisicao('RVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Registrar Visita</a>
                                 </li>
@@ -62,7 +61,16 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form pull-right" action="ServletLoginLogout" method="post">  
+                <form class="navbar-form pull-right" action="ServletLoginLogout" method="post">
+                    <c:if test="${sessionScope.userType == 1}">
+                        <img alt="Perfil" width="35" height="35" src="common/assets/avatar-condomino.png">
+                    </c:if>
+                    <c:if test="${sessionScope.userType == 2}">
+                        <img alt="Perfil" width="35" height="35" src="common/assets/avatar-sindico.png">
+                    </c:if>
+                    <c:if test="${sessionScope.userType == 3}">
+                        <img alt="Perfil" width="35" height="35" src="common/assets/avatar-funcionario.png">
+                    </c:if>
                     <input type="hidden" name="ACTION" value="LOGOUT"/>
                     <button class="btn btn-link" type="submit">Sair <span class="glyphicon glyphicon-log-out"></span></button>
                 </form>  
@@ -85,6 +93,17 @@
 
             document.body.appendChild(form);
 
+            var inputPagina = document.createElement("input"); 
+
+            form.method = "POST";
+            form.action = "ServletEncaminhador";   
+
+            inputPagina.value = valorRequisicao;
+            inputPagina.name = "ACTION";
+
+            form.appendChild(inputPagina);  
+
+            document.body.appendChild(form);
             form.submit();
         }
     </script>

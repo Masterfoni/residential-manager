@@ -1,6 +1,7 @@
 package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Informativo;
+import ifpe.edu.utils.BoolRequestResult;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,6 +34,25 @@ public class InformativoHandler {
         }
         
         return sucesso;
+    }
+    
+    public BoolRequestResult deleteInformativo(Long informativoId) {
+        BoolRequestResult resultado = new BoolRequestResult();
+        
+        try {
+            resultado.hasErrors = false;
+            entityManager.remove(
+                    entityManager.createNamedQuery("Informativo.findById", Informativo.class)
+                    .setParameter("id", informativoId).getSingleResult());
+            
+            resultado.data = true;
+        } catch (Exception e) {
+            resultado.hasErrors = true;
+            resultado.message = e.getMessage();
+            e.printStackTrace();
+        }
+
+        return resultado;
     }
     
     public List<Informativo> getInformativos() {
