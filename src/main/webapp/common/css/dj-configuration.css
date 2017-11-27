@@ -9,11 +9,40 @@ html {
 
 body {
     height: 100%;
-    background-color: #551a8b;
+    background-color: #ab95bf;
 }
 
 .navbar {
     margin-bottom: 0;
+}
+
+.navbar {
+    border-bottom: none;
+    background: linear-gradient(134deg, rgb(167, 29, 169), rgb(15, 185, 187));
+}
+
+ul.dropdown-menu {
+    background: linear-gradient(134deg, rgb(167, 29, 169), rgb(15, 185, 187));
+}
+
+.nav.navbar-nav li a {
+    color: white;
+}
+
+.nav.navbar-nav li a:hover {
+    color: black;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: black;
+}
+
+.navbar-form .btn-link {
+    color: white;
 }
 
 .container-fluid {

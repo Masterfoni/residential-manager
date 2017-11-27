@@ -18,8 +18,8 @@
         <%@include  file="../common/html/fixed-menu.jsp" %>
 
         <div class="container-fluid">
-            <div class="row">
-                <h3>Cadastre Sua Visita</h3>
+            <div class="page-header">
+                <h1>Cadastre Sua Visita</h1>
             </div>
             <div class="row">
                 <form id="visita-form" action="ServletVisita" method="post" role="form">
@@ -63,6 +63,11 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>        
+    
+        <script>
+            $('.cpf').mask("999.999.999-99",{placeholder:" "});
+        </script>
     </body>
 </html>

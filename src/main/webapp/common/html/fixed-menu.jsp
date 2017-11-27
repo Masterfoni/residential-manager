@@ -18,7 +18,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Gerenciador de Condominios</a>
+                <a class="navbar-brand" onclick="encaminhaRequisicao('VINFORMATIVO')" role="button">
+                    Gerenciador de Condominios
+                </a>
             </div>
             <div id="theNavbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
