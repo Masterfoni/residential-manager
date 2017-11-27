@@ -28,6 +28,8 @@ body {
     background-color: whitesmoke;
     
     overflow-y: scroll;
+    
+    text-align: center;
 }
 
 p.success {

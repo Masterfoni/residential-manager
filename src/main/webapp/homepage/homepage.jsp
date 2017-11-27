@@ -79,6 +79,7 @@
                     var convertedResponse = JSON.parse(response);
                     if(convertedResponse.Success) {
                         element.parentElement.parentElement.removeChild(element.parentElement);
+                        $(".tooltip").hide();
                     } else {
                         alert("Ocorreu um problema ao deletar o informativo");
                     }

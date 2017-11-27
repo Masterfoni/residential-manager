@@ -18,6 +18,9 @@ public class ServletEncaminhador extends HttpServlet {
     @EJB
     InformativoHandler inforHandler;
     
+    @EJB
+    VisitaHandler visitaHandler;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,6 +41,7 @@ public class ServletEncaminhador extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("ACTION");
         
+        HttpSession session = request.getSession();
         RequestDispatcher reqDisp;
         
         if(action.equals("CINFORMATIVO"))
@@ -50,12 +54,14 @@ public class ServletEncaminhador extends HttpServlet {
             request.setAttribute("errorMessage", "");
             request.setAttribute("successMessage", "");
             
+            session.setAttribute("inforList", inforHandler.getInformativos());
+            
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }
         if(action.equals("RVISITA"))
         {
-            reqDisp = request.getRequestDispatcher("/visitas/cadastro-visitas.jsp");
+            reqDisp = request.getRequestDispatcher("/cadastro-visitas/cadastro-visitas.jsp");
             reqDisp.forward(request, response);
         }
         else if(action.equals("GVISITA"))
@@ -63,7 +69,9 @@ public class ServletEncaminhador extends HttpServlet {
             request.setAttribute("errorMessage", "");
             request.setAttribute("sucessMessage", "");
             
-            reqDisp = request.getRequestDispatcher("/visitas/gerenciar-visitas.jsp");
+            session.setAttribute("visitaList", visitaHandler.getVisitas());
+            
+            reqDisp = request.getRequestDispatcher("/gerenciar-visitas/gerenciar-visitas.jsp");
             reqDisp.forward(request, response);
         }
     }
