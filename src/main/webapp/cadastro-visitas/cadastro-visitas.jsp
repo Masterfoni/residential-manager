@@ -65,9 +65,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.bootcss.com/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>        
-    
-        <script>
-            $('.cpf').mask("999.999.999-99",{placeholder:" "});
-        </script>
+        <script src="cadastro-visitas/cadastro-visitas.js"></script>
     </body>
 </html>

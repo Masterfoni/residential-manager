@@ -57,7 +57,8 @@
             
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    
+        <script src="homepage/homepage.js"></script>
+        
         <c:if test="${not empty errorMessage}">
             <script>
                 $('#myModal').modal('toggle');
@@ -68,23 +69,5 @@
                 $('#myModal').modal('toggle');
             </script>
         </c:if>
-            
-        <script>
-            $(document).ready(function(){
-                $('[data-toggle="tooltip"]').tooltip(); 
-            });
-            
-            function deletaInformativo(element, id) {
-                $.get("ServletInformativo", { deleteId: id }, function(response) {
-                    var convertedResponse = JSON.parse(response);
-                    if(convertedResponse.Success) {
-                        element.parentElement.parentElement.removeChild(element.parentElement);
-                        $(".tooltip").hide();
-                    } else {
-                        alert("Ocorreu um problema ao deletar o informativo");
-                    }
-                });
-            }
-        </script>
     </body> 
 </html>
