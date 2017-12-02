@@ -1,11 +1,16 @@
 package ifpe.edu.servlets;
 
+import com.google.gson.Gson;
 import ifpe.edu.entities.Visita;
 import ifpe.edu.handlers.UsuarioHandler;
-import ifpe.edu.entities.Usuario;
+import ifpe.edu.handlers.InformativoHandler;
 import ifpe.edu.handlers.VisitaHandler;
+import ifpe.edu.utils.RequestResult;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,15 +29,78 @@ public class ServletVisita extends HttpServlet {
     @EJB 
     VisitaHandler vsHandler;
     
+    @EJB
+    InformativoHandler inforHandler;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher reqDisp;
+        HttpSession session = request.getSession();
+
+        request.setAttribute("errorMessage", "");
+        request.setAttribute("successMessage", "");
+
+        session.setAttribute("inforList", inforHandler.getInformativos());
+
+        reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
+        reqDisp.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("visitaId");
+        String action = request.getParameter("ACTION");
         
+        if(action.equals("CADASTRAR"))
+        {
+            cadastrarVisita(request, response);
+        }
+        else if(action.equals("DELETAR"))
+        {
+            deletarVisita(request, response, id);
+        }
+        else if(action.equals("ATUALIZAR"))
+        {
+            atualizarVisita(request, response, id);
+        }
+    }
+    
+    public void atualizarVisita(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException 
+    {
+        Long visitaId = Long.parseLong(id);
+        
+        vsHandler.marcarCompareceu(vsHandler.findVisita(visitaId).data);
+        
+        Map<String, String> options = new LinkedHashMap<>();
+        options.put("Success", "TRUE");
+        
+        String json = new Gson().toJson(options);
+
+        response.setContentType("text/plain");  
+        response.setCharacterEncoding("UTF-8"); 
+        response.getWriter().write(json);
+    }
+    
+    public void deletarVisita(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException 
+    {
+        Long visitaId = Long.parseLong(id);
+        
+        vsHandler.deleteVisita(visitaId);
+        
+        Map<String, String> options = new LinkedHashMap<>();
+        options.put("Success", "TRUE");
+        
+        String json = new Gson().toJson(options);
+
+        response.setContentType("text/plain");  
+        response.setCharacterEncoding("UTF-8"); 
+        response.getWriter().write(json);
+    }
+    
+    public void cadastrarVisita(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
         HttpSession session = request.getSession();
         RequestDispatcher reqDisp;
         
@@ -40,26 +108,35 @@ public class ServletVisita extends HttpServlet {
         
         if(userId != null)
         {
-            Usuario atualUsuario = userHandler.findUsuario(userId);
             Visita novaVisita = new Visita();
-            Date dataCriacao = new Date();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            String dataString = request.getParameter("valData");
             
             novaVisita.setCpf(request.getParameter("valCpf"));
             novaVisita.setNome(request.getParameter("valNome"));
-            novaVisita.setUsuario(atualUsuario);
+            novaVisita.setUsuario(userHandler.findUsuario(userId));
             novaVisita.setReserva(0);
-            novaVisita.setDataCriacao(dataCriacao);
+            novaVisita.setDataCriacao(new Date());
+            
+            try {
+                Date dataVisita = sdf.parse(dataString);
+                novaVisita.setDataVisita(dataVisita);
+            } catch (Exception e) {
+                e.printStackTrace();
+                novaVisita.setDataVisita(new Date());
+            }
         
-            if(vsHandler.insertVisita(novaVisita))
+            RequestResult resultado = vsHandler.insertVisita(novaVisita);
+            
+            if(!resultado.hasErrors)
             {
-                request.setAttribute("sucessMessage", "Visita Cadastrada com Sucesso!");
+                request.setAttribute("successMessage", "Visita Cadastrada com Sucesso!");
             }
             else
             {
-                request.setAttribute("errrorMessage", "Ocorreu um Erro ao cadastrar a Visita");
+                request.setAttribute("errorMessage", resultado.message);
             }
-            
-            session.setAttribute("visitaList", vsHandler.getVisitas());
             
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);

@@ -23,6 +23,7 @@
             </div>
             <div class="row">
                 <form id="visita-form" action="ServletVisita" method="post" role="form">
+                    <input type="hidden" name="ACTION" value="CADASTRAR"/>
                     <div class="form-group">
                         <div>
                             <input type="text" name="valNome" class="form-control"
@@ -33,6 +34,12 @@
                         <div>
                             <input type="text" name="valCpf" class="cpf form-control"
                                    placeholder="Digite o CPF">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input type="datetime-local" name="valData" class="form-control"
+                                   placeholder="Digite a data da visita">
                         </div>
                     </div>
                     <div class="form-group">

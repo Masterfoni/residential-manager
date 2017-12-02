@@ -3,7 +3,9 @@ package ifpe.edu.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name="TB_USUARIO")
@@ -21,6 +23,10 @@ public class Usuario implements Serializable {
     @Column (name="TXT_NOME")
     private String nome;
 
+    @Email(message = "Email inválido!")
+    @Column (name="TXT_EMAIL")
+    private String email;
+    
     @NotBlank(message = "Você deve preencher o campo de login!")
     @Column(name="TXT_LOGIN", unique = true)
     private String login;
@@ -29,7 +35,7 @@ public class Usuario implements Serializable {
     @Column (name="TXT_SENHA")
     private String senha;
 
-    @NotBlank(message = "Você deve preencher o campo de CPF!")
+    @CPF(message = "CPF Inválido!")
     @Column (name="TXT_CPF", unique=true)
     private String cpf;
 
@@ -95,5 +101,13 @@ public class Usuario implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

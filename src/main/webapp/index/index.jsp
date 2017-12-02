@@ -64,6 +64,9 @@
                                             <input type="text" name="valNome" tabindex="1" class="form-control" placeholder="Digite seu nome" value="">
                                         </div>
                                         <div class="form-group">
+                                            <input type="email" name="valEmail" tabindex="1" class="form-control" placeholder="Digite seu email" value="">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="selectSexo">Sexo:</label>
                                             <select class="form-control" id="selectSexo" name="valSexo">
                                                 <option value="Masculino">Masculino</option>

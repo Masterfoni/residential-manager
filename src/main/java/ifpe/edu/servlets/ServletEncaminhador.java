@@ -69,7 +69,7 @@ public class ServletEncaminhador extends HttpServlet {
             request.setAttribute("errorMessage", "");
             request.setAttribute("sucessMessage", "");
             
-            session.setAttribute("visitaList", visitaHandler.getVisitas());
+            session.setAttribute("visitaList", visitaHandler.getVisitasNaoComparecidas());
             
             reqDisp = request.getRequestDispatcher("/gerenciar-visitas/gerenciar-visitas.jsp");
             reqDisp.forward(request, response);

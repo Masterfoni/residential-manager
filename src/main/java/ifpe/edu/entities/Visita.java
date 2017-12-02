@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ifpe.edu.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,15 +17,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
-/**
- *
- * @author DaniloP
- */
 @Entity
 @Table(name = "TB_VISITA")
+@Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "Visita.getVisitas", query = "SELECT v FROM Visita v ORDER BY v.dataCriacao"),
+    @NamedQuery(name = "Visita.getVisitasNaoComparecidas", 
+                query = "SELECT v FROM Visita v WHERE v.finalizada = 0 ORDER BY v.dataVisita DESC"),
     @NamedQuery(name = "Visita.findById", query = "SELECT v FROM Visita v WHERE v.id = :id")
 })
 public class Visita implements Serializable {
@@ -37,11 +34,11 @@ public class Visita implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Você deve preencher o nome da visita.")
     @Column(name = "TXT_NOME")
     private String nome;
 
-    @NotNull
+    @CPF(message = "CPF incorreto!")
     @Column(name = "TXT_CPF")
     private String cpf;
 
@@ -55,9 +52,14 @@ public class Visita implements Serializable {
     
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name ="DT_CRIACAO")
+    @Column(name = "DT_CRIACAO")
     private Date dataCriacao;
-
+    
+    @NotNull(message = "Data da visita deve ser informada!")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DT_VISITA")
+    private Date dataVisita;
+    
     public Long getId() {
         return id;
     }
@@ -105,6 +107,14 @@ public class Visita implements Serializable {
     
     public void setDataCriacao(Date dataCriacao){
         this.dataCriacao = dataCriacao;
+    }
+    
+    public Date getDataVisita(){
+        return dataVisita;
+    }
+    
+    public void setDataVisita(Date dataVisita){
+        this.dataVisita = dataVisita;
     }
        
 }

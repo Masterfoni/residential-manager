@@ -23,38 +23,41 @@
                     <h2>Não Existem Visitas Cadastradas!</h2>
                 </div>
             </c:if>
+            <div>
                 <div>
-                    <div>
-                        <table class="table table-striped">
-                            <thead>
-                                <th class="centered-header">Nome do Visitante</th>
-                                <th class="centered-header">CPF</th>
-                            </thead>
+                    <table class="table table-striped">
+                        <thead>
+                            <th class="centered-header">Nome do Visitante</th>
+                            <th class="centered-header">CPF</th>
+                            <th class="centered-header">Data da visita</th>
+                        </thead>
 
-                            <tbody>
-                                <c:forEach items="${visitaList}" var="visita">
-                                    <tr data-toggle="tooltip" title="Visita Cadastrada em: ${visita.getDataCriacao()}">
-                                        <td>${visita.getNome()}</td>
-                                        <td>${visita.getCpf()}</td>
-                                        <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-remove"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>    
-                        </table>
-                    </div>
+                        <tbody>
+                            <c:forEach items="${visitaList}" var="visita">
+                                <tr>
+                                    <td>${visita.getNome()}</td>
+                                    <td>${visita.getCpf()}</td>
+                                    <td>${visita.getDataVisita()}
+                                    <td data-toggle="tooltip" data-placement="top" title="Marcar que visita compareceu">
+                                        <a onclick="atualizaVisita(this, ${visita.getId()})">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                        </a>
+                                    </td>
+                                    <td data-toggle="tooltip" data-placement="top" title="Marcar que visita não compareceu">
+                                        <a onclick="deletaVisita(this, ${visita.getId()})">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>    
+                    </table>
                 </div>
+            </div>
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="gerenciar-visitas/gerenciar-visitas.js"></script>
     </body>
 </html>
