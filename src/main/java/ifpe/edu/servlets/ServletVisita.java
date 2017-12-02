@@ -3,7 +3,6 @@ package ifpe.edu.servlets;
 import ifpe.edu.entities.Visita;
 import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.entities.Usuario;
-import ifpe.edu.entities.Visita_;
 import ifpe.edu.handlers.VisitaHandler;
 import java.io.IOException;
 import java.util.Date;
@@ -16,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author DaniloP
- */
 @WebServlet(name ="ServletVisita", urlPatterns = {"/ServletVisita"})
 public class ServletVisita extends HttpServlet {
 
@@ -64,11 +59,10 @@ public class ServletVisita extends HttpServlet {
                 request.setAttribute("errrorMessage", "Ocorreu um Erro ao cadastrar a Visita");
             }
             
-            session.setAttribute("visitaList", vsHandler.getVisita());
+            session.setAttribute("visitaList", vsHandler.getVisitas());
             
-            reqDisp = request.getRequestDispatcher("/visitas/gerenciar-visitas.jsp");
+            reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }
-        
     }
 }

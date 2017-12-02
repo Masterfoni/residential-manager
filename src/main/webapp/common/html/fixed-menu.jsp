@@ -18,7 +18,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Gerenciador de Condominios</a>
+                <a class="navbar-brand" onclick="encaminhaRequisicao('VINFORMATIVO')" role="button">
+                    Gerenciador de Condominios
+                </a>
             </div>
             <div id="theNavbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -50,14 +52,16 @@
                     </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <c:if test="${sessionScope.userType !=3}">
+                            <c:if test="${sessionScope.userType != 3}">
                                 <li>
                                     <a onclick="encaminhaRequisicao('RVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Registrar Visita</a>
                                 </li>
                             </c:if>
-                            <li>
-                                <a onclick="encaminhaRequisicao('GVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Gerenciar Visitas</a>
-                            </li>
+                            <c:if test="${sessionScope.userType == 3}">
+                                <li>
+                                    <a onclick="encaminhaRequisicao('GVISITA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Gerenciar Visitas</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </li>
                 </ul>

@@ -1,28 +1,13 @@
 package ifpe.edu.handlers;
 
-import ifpe.edu.entities.TipoUsuario;
-import ifpe.edu.entities.Usuario;
 import ifpe.edu.entities.Visita;
-import ifpe.edu.utils.LongRequestResult;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
-/**
- *
- * @author DaniloP
- */
 @Stateless
 public class VisitaHandler extends HttpServlet {
     
@@ -36,29 +21,31 @@ public class VisitaHandler extends HttpServlet {
     public boolean insertVisita(Visita visita)
     {
         boolean sucesso;
-        try{
+        
+        try {
             entityManager.persist(visita);
             entityManager.flush();
             
             sucesso= true;
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
             
             sucesso = false;
         }
+        
         return sucesso;
-                
     }
 
-    public List<Visita> getVisita(){
+    public List<Visita> getVisitas() {
         List<Visita>  visitaCadastradas = new ArrayList<Visita>();
         
-        try{
+        try {
             visitaCadastradas = entityManager.createNamedQuery("Visita.getVisitas", Visita.class).getResultList();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-     return visitaCadastradas;
+        
+        return visitaCadastradas;
     }
     
     public Visita findVisita(Long id)
