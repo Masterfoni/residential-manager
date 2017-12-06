@@ -39,8 +39,10 @@
                     </li>
                     <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portal de Transparencia <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Visualizar Transparencia</a></li>
-                            <li><a href="#">Adicionar Transparencia</a></li>
+                            <li><a onclick="encaminhaRequisicao('VTRANSPARENCIA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Visualizar Transparencia</a></li>
+                                <c:if test="${sessionScope.userType ==2}">
+                                <li><a onclick="encaminhaRequisicao('CTRANSPARENCIA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Adicionar Transparencia</a></li>
+                                </c:if>
                         </ul>
                     </li>
                     <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reservas <span class="caret"></span></a>
@@ -97,15 +99,15 @@
 
             document.body.appendChild(form);
 
-            var inputPagina = document.createElement("input"); 
+            var inputPagina = document.createElement("input");
 
             form.method = "POST";
-            form.action = "ServletEncaminhador";   
+            form.action = "ServletEncaminhador";
 
             inputPagina.value = valorRequisicao;
             inputPagina.name = "ACTION";
 
-            form.appendChild(inputPagina);  
+            form.appendChild(inputPagina);
 
             document.body.appendChild(form);
             form.submit();

@@ -1,6 +1,7 @@
 package ifpe.edu.servlets;
 
 import ifpe.edu.handlers.InformativoHandler;
+import ifpe.edu.handlers.TransparenciaHandler;
 import ifpe.edu.handlers.VisitaHandler;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sun.rmi.transport.Transport;
 
 @WebServlet(name = "ServletEncaminhador", urlPatterns = {"/ServletEncaminhador"})
 public class ServletEncaminhador extends HttpServlet {
@@ -20,6 +22,9 @@ public class ServletEncaminhador extends HttpServlet {
     
     @EJB
     VisitaHandler visitaHandler;
+    
+    @EJB
+    TransparenciaHandler transpHandler;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -73,6 +78,22 @@ public class ServletEncaminhador extends HttpServlet {
             
             reqDisp = request.getRequestDispatcher("/gerenciar-visitas/gerenciar-visitas.jsp");
             reqDisp.forward(request, response);
+        }
+        if(action.equals("CTRANSPARENCIA"))
+        {
+            reqDisp = request.getRequestDispatcher("/cadastro-transparencia/cadastro-transparencia.jsp");
+            reqDisp.forward(request, response);
+        }
+        else if(action.equals("VTRANSPARENCIA"))
+        {
+            request.setAttribute("errorMessage", "");
+            request.setAttribute("sucessMessage", "");
+            
+            session.setAttribute("transpList", transpHandler.getTransparenciaAdicionadas());
+            
+            reqDisp = request.getRequestDispatcher("/visualizar-transparencia/visualizar-transparencia.jsp");
+            reqDisp.forward(request, response);
+        
         }
     }
 }
