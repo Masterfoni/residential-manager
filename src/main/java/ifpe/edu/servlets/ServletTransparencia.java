@@ -66,9 +66,9 @@ public class ServletTransparencia extends HttpServlet {
             
             novaTransparencia.setUsuario(userHandler.findUsuario(userId));
             String dataString = request.getParameter("valData");
-            Double valor = Double.parseDouble(request.getParameter("valValor"));
+            double valor = Double.parseDouble(request.getParameter("valValor"));
            
-            novaTransparencia.setDescricao(request.getParameter("valDecricao"));
+            novaTransparencia.setDescricao(request.getParameter("valDescricao"));
             novaTransparencia.setValor(valor);
             
             try{

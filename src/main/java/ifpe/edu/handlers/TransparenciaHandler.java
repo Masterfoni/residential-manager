@@ -17,7 +17,7 @@ import javax.ws.rs.core.Request;
 @Stateless
 public class TransparenciaHandler {
     
-    @PersistenceContext(name = "resnanager")
+    @PersistenceContext(name = "resmanager")
     private EntityManager entityManager;
     
     public TransparenciaHandler(){

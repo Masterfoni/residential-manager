@@ -8,28 +8,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="TB_TRANSPARENCIA")
+@NamedQueries({
+    @NamedQuery(name ="Transparencia.getTransparenciaAdicionadas",
+            query = "SELECT t FROM Transparencia t ORDER BY t.dataVigencia")
+})
 public class Transparencia implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     protected Long id;
     
+    @NotBlank(message = "Informe uma Descrição!")
     @Column(name="TXT_DESCRICAO")
     private String descricao;
     
-    @NotNull
+    @NotNull(message = "Data da Vigência deve ser informada!")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="DT_VIGENCIA")
     private Date dataVigencia;
     
-    @NotNull
+    @NotNull(message = "Digite um valor válido!")
     @Column(name="NUM_VALOR")
     private double valor;
     

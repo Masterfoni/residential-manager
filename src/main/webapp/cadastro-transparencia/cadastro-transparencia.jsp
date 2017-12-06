@@ -26,8 +26,8 @@
                     <input type="hidden" name="ACTION" value="CADASTRAR"/>
                     <div class="form-group">
                         <div>
-                            <input type="text" name="valDecricao" class="form-control"
-                                   placeholder="Digite uma Descrição">
+                            <textarea name ='valDescricao' class="form-control"
+                                      placeholder="Digite a Descrição Aqui!"></textarea>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                     </div>
                     <div class="modal-body">
                         <p class="error">${errorMessage}</p>
-                        <p class="success">${successMessage}</p>
+                        <p class="success">${sucessMessage}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -69,9 +69,9 @@
                 </div>
             </div>
         </div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.bootcss.com/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>        
-        <script src="cadastro-visitas/cadastro-visitas.js"></script>
     </body>
 </html>
