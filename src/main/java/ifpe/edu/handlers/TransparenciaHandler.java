@@ -45,10 +45,11 @@ public class TransparenciaHandler {
                 output.hasErrors = true;
             }
         }else
-        {
+        {   
             output.hasErrors = true;
             output.message = violations.iterator().next().getMessage();
         }
+        
         return output;
     }
     
@@ -56,11 +57,11 @@ public class TransparenciaHandler {
         List<Transparencia> transparenciasAdicionadas = new ArrayList<Transparencia>();
         
         try{
-            transparenciasAdicionadas = entityManager.createNamedQuery("Transparencia.getTransparenciasAdicionadas", Transparencia.class).getResultList();
+            transparenciasAdicionadas = entityManager
+                    .createNamedQuery("Transparencia.getTransparenciasAdicionadas", Transparencia.class).getResultList();
         }catch (Exception e){
             e.printStackTrace();
         }
-        
         return transparenciasAdicionadas;
     }
 }

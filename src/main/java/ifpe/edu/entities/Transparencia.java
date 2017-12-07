@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -29,7 +30,7 @@ public class Transparencia implements Serializable {
     protected Long id;
     
     @NotBlank(message = "Informe uma Descrição!")
-    @Column(name="TXT_DESCRICAO")
+    @Column(name="TXT_DESCRICAO", length = 9999)
     private String descricao;
     
     @NotNull(message = "Data da Vigência deve ser informada!")
@@ -37,7 +38,8 @@ public class Transparencia implements Serializable {
     @Column(name="DT_VIGENCIA")
     private Date dataVigencia;
     
-    @NotNull(message = "Digite um valor válido!")
+    @Min(0)
+    @NotNull(message = "Digite um valor válido maior que zero!")
     @Column(name="NUM_VALOR")
     private double valor;
     

@@ -18,23 +18,22 @@
 
         <h1>Visualizar Transparencias</h1>
         <div class="container-fluid">
-            <c:if test="${empty inforList}">
+            <c:if test="${empty transpList}">
                 <div class="jumbotron">
                     <h2>Não há Transparências Adicionadas até o Momento.</h2> 
                 </div>
             </c:if>
-            <c:forEach items="${inforList}" var="informativo">
-                <div class="main-transparencia" data-toggle="tooltip" data-placement="right"
-                     title="Este informativo foi adicionado às: ${informativo.getDataCriacao()}">
+            <c:forEach items="${transpList}" var="transparencia">
                     <c:if test="${sessionScope.userType == 2}">
-                        <button type="button" class="close" onclick="deletaInformativo(this, ${informativo.getId()})">&times;</button>
+                       <!-- <button type="button" class="close" onclick="deletaInformativo(this, ${informativo.getId()})">&times;</button>-->
                     </c:if>
                     <div class="container-transparencia">
-                        ${informativo.getDescricao()}
+                        ${transparencia.getDescricao()}
+                        ${transparencia.getValor()}
+                        ${transparencia.getdataVigencia()}
                     </div>
                 </div>
             </c:forEach>
-        </div>
 
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">

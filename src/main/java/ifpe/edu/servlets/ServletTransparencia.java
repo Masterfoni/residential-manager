@@ -43,7 +43,6 @@ public class ServletTransparencia extends HttpServlet {
     protected  void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
     
-        //String id = request.getParameter("TransparenciaId");
         String action = request.getParameter("ACTION");
         
        if(action.equals("CADASTRAR"))
@@ -62,11 +61,11 @@ public class ServletTransparencia extends HttpServlet {
         if(userId != null)
         {
             Transparencia novaTransparencia = new Transparencia();
-            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
             
             novaTransparencia.setUsuario(userHandler.findUsuario(userId));
             String dataString = request.getParameter("valData");
-            double valor = Double.parseDouble(request.getParameter("valValor"));
+            double valor = request.getParameter("valValor").equals("") ? 0 : Double.parseDouble(request.getParameter("valValor"));
            
             novaTransparencia.setDescricao(request.getParameter("valDescricao"));
             novaTransparencia.setValor(valor);
@@ -83,12 +82,13 @@ public class ServletTransparencia extends HttpServlet {
             
             if(!resultado.hasErrors)
             {
-                request.setAttribute("sucessMessage", "Transparencia Postada Com Sucesso!");
+                request.setAttribute("successMessage", "Transparência Postada Com Sucesso!");
             }else
             {
                 request.setAttribute("errorMessage", resultado.message);
             }
             
+            session.setAttribute("transpList", transpHandler.getTransparenciaAdicionadas());
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }

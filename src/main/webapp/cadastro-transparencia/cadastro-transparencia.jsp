@@ -25,7 +25,7 @@
                 <form id="transparencia-form" action="ServletTransparencia" method="post" role="form">
                     <input type="hidden" name="ACTION" value="CADASTRAR"/>
                     <div class="form-group">
-                        <div>
+                        <div class="row-10">
                             <textarea name ='valDescricao' class="form-control"
                                       placeholder="Digite a Descrição Aqui!"></textarea>
                         </div>
@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <div>
-                            <input type="dateTime-local" name="valData" class="form-control"
+                            <input type="date" name="valData" class="form-control"
                                    placeholder="Digite a Data da Vigência">
                         </div>
                     </div>

@@ -87,7 +87,7 @@ public class ServletEncaminhador extends HttpServlet {
         else if(action.equals("VTRANSPARENCIA"))
         {
             request.setAttribute("errorMessage", "");
-            request.setAttribute("sucessMessage", "");
+            request.setAttribute("successMessage", "");
             
             session.setAttribute("transpList", transpHandler.getTransparenciaAdicionadas());
             
