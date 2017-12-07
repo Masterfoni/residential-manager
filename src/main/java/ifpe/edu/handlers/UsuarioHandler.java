@@ -3,6 +3,8 @@ package ifpe.edu.handlers;
 import ifpe.edu.entities.TipoUsuario;
 import ifpe.edu.entities.Usuario;
 import ifpe.edu.utils.LongRequestResult;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -68,6 +70,19 @@ public class UsuarioHandler {
         }
             
         return resultado;
+    }
+    
+    public List<Usuario> getUsuarios()
+    {
+        List<Usuario> usuariosAchados = new ArrayList<Usuario>();
+        
+        try {
+            usuariosAchados = entityManager.createNamedQuery("Usuario.getUsuarios", Usuario.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return usuariosAchados;
     }
         
     public Usuario findUsuario(String login, String senha) 

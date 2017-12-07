@@ -12,7 +12,8 @@ import org.hibernate.validator.constraints.br.CPF;
 @Access(AccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "Usuario.findByLoginSenha", query = "SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha"),
-    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u Where u.id = :id")
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u Where u.id = :id"),
+    @NamedQuery(name = "Usuario.getUsuarios", query = "SELECT  u FROM Usuario u")
 })
 public class Usuario implements Serializable {
     @Id
