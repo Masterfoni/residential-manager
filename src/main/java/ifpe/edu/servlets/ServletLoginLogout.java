@@ -4,6 +4,8 @@ import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.entities.Usuario;
 import ifpe.edu.handlers.ApartamentoHandler;
 import ifpe.edu.handlers.InformativoHandler;
+import ifpe.edu.handlers.ParametroSistemaHandler;
+import ifpe.edu.utils.Encoder;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -63,9 +65,7 @@ public class ServletLoginLogout extends HttpServlet {
             reqDisp.forward(request, response);
         }
         else
-        {
-            request.setAttribute("errorMessage", "Por favor, realize o login no sistema.");
-            
+        {   
             reqDisp = request.getRequestDispatcher("/index/index.jsp");
             request.setAttribute("apartamentos", apHandler.getApartamentosDesocupados());
             reqDisp.forward(request, response);
@@ -74,7 +74,7 @@ public class ServletLoginLogout extends HttpServlet {
     
     private void realizaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Usuario usuario = usHandler.findUsuario(request.getParameter("valLogin"), request.getParameter("valSenha"));
+        Usuario usuario = usHandler.findUsuario(request.getParameter("valLogin"), Encoder.generateHash(request.getParameter("valSenha")));
         RequestDispatcher reqDisp;
         
         if(usuario != null) 

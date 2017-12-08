@@ -1,8 +1,6 @@
 package ifpe.edu.utils;
 
-import ifpe.edu.handlers.ParametroSistemaHandler;
 import java.util.*;
-import javax.ejb.EJB;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -10,8 +8,6 @@ import javax.mail.internet.MimeMessage;
 public class EmailSender {
     Properties props;
     Session session;
-    
-    final String host = "localhost";
     
     String message;
     String remetente = "MySindico";

@@ -50,11 +50,12 @@
                                     </form>
                                     <form id="register-form" action="ServletCadastro" method="post" role="form" style="display: none;">
                                         <div class="form-group">
-                                            <label for="selectApartamento">Escolha seu apartamento:</label>
-                                            <select class="form-control" id="selectApartamento" name="valApartamento">
-                                                <c:forEach items="${apartamentos}" var="ap">
-                                                    <option value="${ap.id}"><c:out value="${ap.numero}"/></option>
-                                                </c:forEach>
+                                            <select class="form-control" name="valApartamento">
+                                                <optgroup label="Apartamento">
+                                                    <c:forEach items="${apartamentos}" var="ap">
+                                                        <option value="${ap.id}"><c:out value="${ap.numero}"/></option>
+                                                    </c:forEach>
+                                                </optgroup>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -64,23 +65,32 @@
                                             <input type="text" name="valNome" tabindex="1" class="form-control" placeholder="Digite seu nome" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="valEmail" tabindex="1" class="form-control" placeholder="Digite seu email" value="">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">@</span>
+                                                <input type="email" name="valEmail" tabindex="1" class="form-control" placeholder="Digite seu email" value="">
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="selectSexo">Sexo:</label>
-                                            <select class="form-control" id="selectSexo" name="valSexo">
-                                                <option value="Masculino">Masculino</option>
-                                                <option value="Feminino">Feminino</option>
+                                            <select class="form-control" name="valSexo">
+                                                <optgroup label="Sexo">
+                                                    <option value="Masculino">Masculino</option>
+                                                    <option value="Feminino">Feminino</option>
+                                                </optgroup>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="valCpf" tabindex="1" class="cpf form-control" placeholder="Digite seu CPF" value="">
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" name="valSenha" id="password" tabindex="2" class="form-control" placeholder="Digite sua senha">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <input type="password" name="valSenha" id="password" tabindex="2" class="form-control" placeholder="Digite sua senha">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="password" name="valConfSenha" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirme sua senha">
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="valConfSenha" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirme sua senha">
+                                            <input type="password" name="valToken" tabindex="2" class="form-control" placeholder="Digite o seu token">
                                         </div>
                                         <div class="form-group">
                                             <div class="row">

@@ -7,12 +7,11 @@ html {
 }
 
 body {
-    height: 100%;
     background: linear-gradient(134deg, rgb(167, 29, 169), rgb(15, 185, 187));
 }
 
 .panel-login {
-    margin-top: 30%;
+    margin-top: 15%;
     border-color: #ccc;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -53,7 +52,7 @@ body {
 }
 
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
-    height: 45px;
+    height: 40px;
     border: 1px solid #ddd;
     font-size: 16px;
     -webkit-transition: all 0.1s linear;
