@@ -1,5 +1,6 @@
 package ifpe.edu.servlets;
 
+import com.google.gson.Gson;
 import ifpe.edu.entities.Informativo;
 import ifpe.edu.entities.Transparencia;
 import ifpe.edu.entities.Usuario;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +39,7 @@ public class ServletTransparencia extends HttpServlet {
         HttpSession session = request.getSession();
         
         request.setAttribute("errorMessage", "");
-        request.setAttribute("sucessMessage", "");
+        request.setAttribute("successMessage", "");
     }
     
     @Override
@@ -48,6 +51,10 @@ public class ServletTransparencia extends HttpServlet {
        if(action.equals("CADASTRAR"))
        {
            cadastrarTransparencia(request, response);
+       }
+       if(action.equals("DELETAR"))
+       {
+           deletarTransparencia(request, response, id);
        }
     }
                       
@@ -94,5 +101,22 @@ public class ServletTransparencia extends HttpServlet {
         }
     
     }
-
+    
+    public void deletarTransparencia(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        Long TransparenciaId = Long.parseLong(id);
+        
+        transpHandler.deletarTransparencia(transparenciaId);
+        
+        Map<String, String> options = new LinkedHashMap<>();
+        options.put("success", "TRUE");
+        
+        String json = new Gson().toJson(options);
+        
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+    
+    }
 }

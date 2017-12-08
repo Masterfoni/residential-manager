@@ -58,10 +58,34 @@ public class TransparenciaHandler {
         
         try{
             transparenciasAdicionadas = entityManager
-                    .createNamedQuery("Transparencia.getTransparenciasAdicionadas", Transparencia.class).getResultList();
+                    .createNamedQuery("Transparencia.getTransparenciaAdicionadas", Transparencia.class).getResultList();
         }catch (Exception e){
             e.printStackTrace();
         }
         return transparenciasAdicionadas;
     }
+    
+    public void deleteTransparencia(Long transparenciaId)
+    {
+        entityManager.remove(entityManager.createNamedQuery("Transparencia.findyId", Transparencia.class).setParameter("id", transparenciaId)
+                .getSingleResult());
+    }
+/*
+    public TransparenciaRequestResult findTransparencia(Long id)
+    {
+        TransparenciaRequestResult output = new TransparenciaRequestResult();
+        output.hasErrors = false;
+        
+        try{
+            output.data = entityManager.createNamedQuery("transparencia.findByid", Transparencia.class).setParameter("id", id)
+                    .getSingleResult();
+        }catch(Exception e)
+        {
+            output.hasErrors = true;
+            output.message = e.getMessage();
+        
+        }
+                
+            return output;
+    }*/
 }
