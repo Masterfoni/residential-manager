@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import ifpe.edu.entities.Visita;
 import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.handlers.InformativoHandler;
+import ifpe.edu.handlers.ParametroSistemaHandler;
 import ifpe.edu.handlers.VisitaHandler;
+import ifpe.edu.utils.EmailSender;
 import ifpe.edu.utils.RequestResult;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,9 @@ public class ServletVisita extends HttpServlet {
     
     @EJB
     InformativoHandler inforHandler;
+    
+    @EJB
+    ParametroSistemaHandler psHandler;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -71,7 +76,16 @@ public class ServletVisita extends HttpServlet {
     {
         Long visitaId = Long.parseLong(id);
         
-        vsHandler.marcarCompareceu(vsHandler.findVisita(visitaId).data);
+        Visita visita = vsHandler.findVisita(visitaId).data;
+        
+        vsHandler.marcarCompareceu(visita);
+                    
+        EmailSender notificador = new EmailSender(visita.getNome() + " acabou de chegar!",
+        psHandler.findParametro("SMTPUSERNAME").data.getValor(),
+        psHandler.findParametro("SMTPPASSWORD").data.getValor());
+        
+        notificador.setDestinatario(visita.getUsuario().getEmail());
+        notificador.send();
         
         Map<String, String> options = new LinkedHashMap<>();
         options.put("Success", "TRUE");
@@ -87,7 +101,18 @@ public class ServletVisita extends HttpServlet {
     {
         Long visitaId = Long.parseLong(id);
         
+        Visita visita = vsHandler.findVisita(visitaId).data;
         vsHandler.deleteVisita(visitaId);
+        
+        if(visita != null)
+        {
+            EmailSender notificador = new EmailSender("O porteiro marcou o não-comparecimento de " + visita.getNome(),
+            psHandler.findParametro("SMTPUSERNAME").data.getValor(),
+            psHandler.findParametro("SMTPPASSWORD").data.getValor());
+            
+            notificador.setDestinatario(visita.getUsuario().getEmail());
+            notificador.send();
+        }
         
         Map<String, String> options = new LinkedHashMap<>();
         options.put("Success", "TRUE");

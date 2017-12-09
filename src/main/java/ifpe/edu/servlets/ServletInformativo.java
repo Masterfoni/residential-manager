@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import ifpe.edu.entities.Informativo;
 import ifpe.edu.entities.Usuario;
 import ifpe.edu.handlers.InformativoHandler;
+import ifpe.edu.handlers.ParametroSistemaHandler;
 import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.utils.BoolRequestResult;
+import ifpe.edu.utils.EmailSender;
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -27,6 +29,9 @@ public class ServletInformativo extends HttpServlet {
     
     @EJB
     UsuarioHandler usHandler;
+    
+    @EJB
+    ParametroSistemaHandler psHandler;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -68,6 +73,17 @@ public class ServletInformativo extends HttpServlet {
             if(infoHandler.insertInformativo(novoInformativo))
             {
                 request.setAttribute("successMessage", "Informativo cadastrado com sucesso!");
+                
+                EmailSender notificador = 
+                new EmailSender("Um novo informativo foi postado pelo síndico do seu condomínio.",
+                psHandler.findParametro("SMTPUSERNAME").data.getValor(),
+                psHandler.findParametro("SMTPPASSWORD").data.getValor());
+                
+                for(Usuario usr : usHandler.getUsuarios())
+                {
+                    notificador.setDestinatario(usr.getEmail());
+                    notificador.send();
+                }
             }
             else 
             {
