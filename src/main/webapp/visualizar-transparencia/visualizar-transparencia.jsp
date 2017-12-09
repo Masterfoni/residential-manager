@@ -25,14 +25,15 @@
             </c:if>
             <c:forEach items="${transpList}" var="transparencia">
                 <div class="main-transparencia" data-toggle="tooltip" data-placement="right"
-                     title="Este informativo foi adicionado às: ${transparencia.getDataVigencia()}">
+                     title="Remover Transparencia"> 
                     <c:if test="${sessionScope.userType == 2}">
-                       <button type="button" class="close" onclick="deletaTransparencia(this, ${transparencia.getId()})">&times;</button>
+                        <a onclick="deletaTransparencia(this, ${transparencia.getId()})"></a>
+                         <span class="glyphicon glyphicon-remove"></span>
                     </c:if>
                     <div class="container-transparencia">
-                        <div> Descrição: ${transparencia.getDescricao()}</div>
-                        <div> Valor Gasto R$: ${transparencia.getValor()}</div>
-                        <div> Data Vigência: ${transparencia.getDataVigencia()}</div>
+                        <div> Descrição:${transparencia.getDescricao()}</div>
+                        <div> Valor Gasto R$:${transparencia.getValor()}</div>
+                        <div> Data Vigência:${transparencia.getDataVigencia()}</div>
                     </div> 
                 </div>
                 </c:forEach>
@@ -58,5 +59,6 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://cdn.bootcss.com/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>        
+            <script src="visualizar-transparencia/visualizar-transparencia.js"></script>
     </body>
 </html>

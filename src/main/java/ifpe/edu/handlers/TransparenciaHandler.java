@@ -2,6 +2,7 @@ package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Transparencia;
 import ifpe.edu.utils.RequestResult;
+import ifpe.edu.utils.TransparenciaRequestResult;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -70,14 +71,14 @@ public class TransparenciaHandler {
         entityManager.remove(entityManager.createNamedQuery("Transparencia.findyId", Transparencia.class).setParameter("id", transparenciaId)
                 .getSingleResult());
     }
-/*
+
     public TransparenciaRequestResult findTransparencia(Long id)
     {
         TransparenciaRequestResult output = new TransparenciaRequestResult();
         output.hasErrors = false;
         
         try{
-            output.data = entityManager.createNamedQuery("transparencia.findByid", Transparencia.class).setParameter("id", id)
+            output.data = entityManager.createNamedQuery("Transparencia.findById", Transparencia.class).setParameter("id", id)
                     .getSingleResult();
         }catch(Exception e)
         {
@@ -85,7 +86,6 @@ public class TransparenciaHandler {
             output.message = e.getMessage();
         
         }
-                
             return output;
-    }*/
+    }
 }

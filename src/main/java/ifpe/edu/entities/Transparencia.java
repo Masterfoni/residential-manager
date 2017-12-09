@@ -24,7 +24,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name="TB_TRANSPARENCIA")
 @NamedQueries({
     @NamedQuery(name ="Transparencia.getTransparenciaAdicionadas",
-            query = "SELECT t FROM Transparencia t ORDER BY t.dataVigencia")
+            query = "SELECT t FROM Transparencia t ORDER BY t.dataVigencia"),
+    @NamedQuery(name ="Transparencia.findById", query = "SELECT t FROM Transparencia t WHERE t.id = :id")
 })
 public class Transparencia implements Serializable {
     @Id

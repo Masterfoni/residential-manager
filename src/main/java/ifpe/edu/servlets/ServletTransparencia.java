@@ -47,12 +47,13 @@ public class ServletTransparencia extends HttpServlet {
     throws ServletException, IOException{
     
         String action = request.getParameter("ACTION");
+        String id = request.getParameter("transparenciaId");
         
        if(action.equals("CADASTRAR"))
        {
            cadastrarTransparencia(request, response);
        }
-       if(action.equals("DELETAR"))
+       else if(action.equals("DELETAR"))
        {
            deletarTransparencia(request, response, id);
        }
@@ -102,12 +103,12 @@ public class ServletTransparencia extends HttpServlet {
     
     }
     
-    public void deletarTransparencia(HttpServletRequest request, HttpServletResponse response)
+    public void deletarTransparencia(HttpServletRequest request, HttpServletResponse response, String id)
             throws ServletException, IOException
     {
-        Long TransparenciaId = Long.parseLong(id);
+        Long transparenciaId = Long.parseLong(id);
         
-        transpHandler.deletarTransparencia(transparenciaId);
+        transpHandler.deleteTransparencia(transparenciaId);
         
         Map<String, String> options = new LinkedHashMap<>();
         options.put("success", "TRUE");
