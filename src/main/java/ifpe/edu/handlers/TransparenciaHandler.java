@@ -68,7 +68,7 @@ public class TransparenciaHandler {
     
     public void deleteTransparencia(Long transparenciaId)
     {
-        entityManager.remove(entityManager.createNamedQuery("Transparencia.findyId", Transparencia.class).setParameter("id", transparenciaId)
+        entityManager.remove(entityManager.createNamedQuery("Transparencia.findById", Transparencia.class).setParameter("id", transparenciaId)
                 .getSingleResult());
     }
 

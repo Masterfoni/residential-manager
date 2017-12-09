@@ -45,9 +45,10 @@ public class ServletTransparencia extends HttpServlet {
     @Override
     protected  void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
-    
-        String action = request.getParameter("ACTION");
+
         String id = request.getParameter("transparenciaId");
+        String action = request.getParameter("ACTION");
+
         
        if(action.equals("CADASTRAR"))
        {
@@ -69,7 +70,7 @@ public class ServletTransparencia extends HttpServlet {
         if(userId != null)
         {
             Transparencia novaTransparencia = new Transparencia();
-            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat date = new SimpleDateFormat("dd-MM-YYYY");
             
             novaTransparencia.setUsuario(userHandler.findUsuario(userId));
             String dataString = request.getParameter("valData");

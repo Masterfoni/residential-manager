@@ -15,9 +15,10 @@
     </head>
     <body>
         <%@include  file="../common/html/fixed-menu.jsp" %>
-
-        <h1>Visualizar Transparencias</h1>
         <div class="container-fluid">
+            <div class="page-header">
+                <h1>Visualize as Finanças</h1>
+            </div> 
             <c:if test="${empty transpList}">
                 <div class="jumbotron">
                     <h2>Não há Transparências Adicionadas até o Momento.</h2> 
@@ -27,8 +28,9 @@
                 <div class="main-transparencia" data-toggle="tooltip" data-placement="right"
                      title="Remover Transparencia"> 
                     <c:if test="${sessionScope.userType == 2}">
-                        <a onclick="deletaTransparencia(this, ${transparencia.getId()})"></a>
-                         <span class="glyphicon glyphicon-remove"></span>
+                        <a  onclick="deletaTransparencia(this, ${transparencia.getId()})">
+                        <span id="remove" class="glyphicon glyphicon-remove"></span>
+                        </a>
                     </c:if>
                     <div class="container-transparencia">
                         <div> Descrição:${transparencia.getDescricao()}</div>
