@@ -1,6 +1,7 @@
 package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Transparencia;
+import ifpe.edu.utils.BoolRequestResult;
 import ifpe.edu.utils.RequestResult;
 import ifpe.edu.utils.TransparenciaRequestResult;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.ws.rs.core.Request;
 
 @Stateless
 public class TransparenciaHandler {
@@ -37,15 +37,15 @@ public class TransparenciaHandler {
         
         if(violations.size()<=0)
         {
-            try{
+            try {
                 entityManager.persist(transparencia);
                 entityManager.flush();
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 output.message = e.getMessage();
                 output.hasErrors = true;
             }
-        }else
+        }
+        else
         {   
             output.hasErrors = true;
             output.message = violations.iterator().next().getMessage();
@@ -53,23 +53,85 @@ public class TransparenciaHandler {
         
         return output;
     }
-    
-    public List<Transparencia> getTransparenciaAdicionadas(){
-        List<Transparencia> transparenciasAdicionadas = new ArrayList<Transparencia>();
+
+    public List<Transparencia> getTransparenciasByMes(int mes)
+    {
+        List<Transparencia> transparenciasAdicionadas = new ArrayList<>();
         
-        try{
+        try {
             transparenciasAdicionadas = entityManager
-                    .createNamedQuery("Transparencia.getTransparenciaAdicionadas", Transparencia.class).getResultList();
-        }catch (Exception e){
+                    .createNamedQuery("Transparencia.getTransparenciasByMes", Transparencia.class)
+                    .setParameter("mes", mes).getResultList();
+        } catch (Exception e){
             e.printStackTrace();
         }
+        
         return transparenciasAdicionadas;
     }
     
-    public void deleteTransparencia(Long transparenciaId)
+    public List<Transparencia> getTransparenciasAdicionadasByAno(int ano)
     {
-        entityManager.remove(entityManager.createNamedQuery("Transparencia.findById", Transparencia.class).setParameter("id", transparenciaId)
-                .getSingleResult());
+        List<Transparencia> transparenciasAdicionadas = new ArrayList<>();
+        
+        try {
+            transparenciasAdicionadas = entityManager
+                    .createNamedQuery("Transparencia.getTransparenciasByAno", Transparencia.class)
+                    .setParameter("ano", ano).getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return transparenciasAdicionadas;
+    }
+    
+    public List<Transparencia> getTransparenciasByMesAno(int mes, int ano)
+    {
+        List<Transparencia> transparenciasAdicionadas = new ArrayList<>();
+        
+        try {
+            transparenciasAdicionadas = entityManager
+                    .createNamedQuery("Transparencia.getTransparenciasByMesAno", Transparencia.class)
+                    .setParameter("mes", mes)
+                    .setParameter("ano", ano).getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return transparenciasAdicionadas;
+    }
+    
+    public List<Transparencia> getTransparenciaAdicionadas()
+    {
+        List<Transparencia> transparenciasAdicionadas = new ArrayList<>();
+        
+        try {
+            transparenciasAdicionadas = entityManager
+                    .createNamedQuery("Transparencia.getTransparenciaAdicionadas", Transparencia.class).getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return transparenciasAdicionadas;
+    }
+
+    public BoolRequestResult deleteTransparencia(Long transparenciaId)
+    {
+        BoolRequestResult resultado = new BoolRequestResult();
+        
+        try {
+            resultado.hasErrors = false;
+            
+            entityManager.remove(entityManager.createNamedQuery("Transparencia.findById", Transparencia.class).setParameter("id", transparenciaId)
+                    .getSingleResult());
+            
+            resultado.data = true;
+        } catch (Exception e) {
+            resultado.hasErrors = true;
+            resultado.message = e.getMessage();
+            e.printStackTrace();
+        }
+        
+        return resultado;
     }
 
     public TransparenciaRequestResult findTransparencia(Long id)
@@ -77,15 +139,14 @@ public class TransparenciaHandler {
         TransparenciaRequestResult output = new TransparenciaRequestResult();
         output.hasErrors = false;
         
-        try{
+        try {
             output.data = entityManager.createNamedQuery("Transparencia.findById", Transparencia.class).setParameter("id", id)
                     .getSingleResult();
-        }catch(Exception e)
-        {
+        } catch(Exception e) {
             output.hasErrors = true;
             output.message = e.getMessage();
-        
         }
-            return output;
+        
+        return output;
     }
 }

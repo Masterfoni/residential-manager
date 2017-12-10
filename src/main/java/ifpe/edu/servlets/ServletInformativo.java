@@ -74,15 +74,14 @@ public class ServletInformativo extends HttpServlet {
             {
                 request.setAttribute("successMessage", "Informativo cadastrado com sucesso!");
                 
-                EmailSender notificador = 
-                new EmailSender("Um novo informativo foi postado pelo síndico do seu condomínio.",
-                psHandler.findParametro("SMTPUSERNAME").data.getValor(),
-                psHandler.findParametro("SMTPPASSWORD").data.getValor());
+                String smtpUsername = psHandler.findParametro("SMTPUSERNAME").data.getValor();
+                String smtpPassword = psHandler.findParametro("SMTPPASSWORD").data.getValor();
                 
                 for(Usuario usr : usHandler.getUsuarios())
                 {
+                    EmailSender notificador = new EmailSender("Um novo informativo foi postado pelo síndico do seu condomínio.", smtpUsername, smtpPassword);
                     notificador.setDestinatario(usr.getEmail());
-                    notificador.send();
+                    notificador.start();
                 }
             }
             else 

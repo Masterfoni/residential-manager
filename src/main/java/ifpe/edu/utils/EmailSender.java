@@ -5,7 +5,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EmailSender {
+public class EmailSender extends Thread {
     Properties props;
     Session session;
     
@@ -28,6 +28,21 @@ public class EmailSender {
                 return new PasswordAuthentication(username, password);
             }
         });
+    }
+    
+    public void run() {
+        try {
+            MimeMessage mensagem = new MimeMessage(session);
+            
+            mensagem.setFrom(new InternetAddress(remetente));
+            mensagem.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            mensagem.setSubject("Aviso do MySindico!");
+            mensagem.setText(this.message);
+            
+            Transport.send(mensagem);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public boolean send()

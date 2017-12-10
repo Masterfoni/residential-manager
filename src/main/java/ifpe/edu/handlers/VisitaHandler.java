@@ -1,7 +1,6 @@
 package ifpe.edu.handlers;
 
 import ifpe.edu.entities.Visita;
-import ifpe.edu.utils.EmailSender;
 import ifpe.edu.utils.RequestResult;
 import ifpe.edu.utils.VisitaRequestResult;
 import java.util.ArrayList;

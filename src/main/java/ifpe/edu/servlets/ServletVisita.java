@@ -85,7 +85,7 @@ public class ServletVisita extends HttpServlet {
         psHandler.findParametro("SMTPPASSWORD").data.getValor());
         
         notificador.setDestinatario(visita.getUsuario().getEmail());
-        notificador.send();
+        notificador.start();
         
         Map<String, String> options = new LinkedHashMap<>();
         options.put("Success", "TRUE");
@@ -111,7 +111,7 @@ public class ServletVisita extends HttpServlet {
             psHandler.findParametro("SMTPPASSWORD").data.getValor());
             
             notificador.setDestinatario(visita.getUsuario().getEmail());
-            notificador.send();
+            notificador.start();
         }
         
         Map<String, String> options = new LinkedHashMap<>();

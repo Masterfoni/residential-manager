@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import sun.rmi.transport.Transport;
 
 @WebServlet(name = "ServletEncaminhador", urlPatterns = {"/ServletEncaminhador"})
 public class ServletEncaminhador extends HttpServlet {
@@ -89,11 +88,23 @@ public class ServletEncaminhador extends HttpServlet {
             request.setAttribute("errorMessage", "");
             request.setAttribute("successMessage", "");
             
-            session.setAttribute("transpList", transpHandler.getTransparenciaAdicionadas());
+            session.setAttribute("janTranspList", transpHandler.getTransparenciasByMesAno(1, 2017));
+            session.setAttribute("fevTranspList", transpHandler.getTransparenciasByMesAno(2, 2017));
+            session.setAttribute("marTranspList", transpHandler.getTransparenciasByMesAno(3, 2017));
+            session.setAttribute("abrTranspList", transpHandler.getTransparenciasByMesAno(4, 2017));
+            session.setAttribute("maiTranspList", transpHandler.getTransparenciasByMesAno(5, 2017));
+            session.setAttribute("junTranspList", transpHandler.getTransparenciasByMesAno(6, 2017));
+            session.setAttribute("julTranspList", transpHandler.getTransparenciasByMesAno(7, 2017));
+            session.setAttribute("agoTranspList", transpHandler.getTransparenciasByMesAno(8, 2017));
+            session.setAttribute("setTranspList", transpHandler.getTransparenciasByMesAno(9, 2017));
+            session.setAttribute("outTranspList", transpHandler.getTransparenciasByMesAno(10, 2017));
+            session.setAttribute("novTranspList", transpHandler.getTransparenciasByMesAno(11, 2017));
+            session.setAttribute("dezTranspList", transpHandler.getTransparenciasByMesAno(12, 2017));
+            
+            session.setAttribute("transpList", transpHandler.getTransparenciasAdicionadasByAno(2017));
             
             reqDisp = request.getRequestDispatcher("/visualizar-transparencia/visualizar-transparencia.jsp");
             reqDisp.forward(request, response);
-        
         }
     }
 }

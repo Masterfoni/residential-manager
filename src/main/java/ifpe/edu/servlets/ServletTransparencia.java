@@ -1,17 +1,20 @@
 package ifpe.edu.servlets;
 
 import com.google.gson.Gson;
-import ifpe.edu.entities.Informativo;
 import ifpe.edu.entities.Transparencia;
 import ifpe.edu.entities.Usuario;
+import ifpe.edu.handlers.ParametroSistemaHandler;
 import ifpe.edu.handlers.TransparenciaHandler;
 import ifpe.edu.handlers.UsuarioHandler;
+import ifpe.edu.utils.BoolRequestResult;
+import ifpe.edu.utils.EmailSender;
 import ifpe.edu.utils.RequestResult;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +24,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transaction;
 
 @WebServlet(name = "ServletTransparencia", urlPatterns = {"/ServletTransparencia"})
 public class ServletTransparencia extends HttpServlet {
@@ -32,32 +34,64 @@ public class ServletTransparencia extends HttpServlet {
     @EJB
     TransparenciaHandler transpHandler;
     
+    @EJB
+    ParametroSistemaHandler psHandler;
+    
     @Override
-    protected  void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        RequestDispatcher reqDisp;
-        HttpSession session = request.getSession();
+    protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long idToDelete = Long.parseLong(request.getParameter("transparenciaId"));
         
-        request.setAttribute("errorMessage", "");
-        request.setAttribute("successMessage", "");
+        BoolRequestResult resultado = transpHandler.deleteTransparencia(idToDelete);
+        
+        Map<String, String> options = new LinkedHashMap<>();
+        options.put("Success", ""+resultado.data);
+        
+        String json = new Gson().toJson(options);
+
+        response.setContentType("text/plain");  
+        response.setCharacterEncoding("UTF-8"); 
+        response.getWriter().write(json);
     }
     
     @Override
-    protected  void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException{
-
-        String id = request.getParameter("transparenciaId");
+    protected  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         String action = request.getParameter("ACTION");
 
+        if(action.equals("CADASTRAR"))
+        {
+            cadastrarTransparencia(request, response);
+        }
+        if(action.equals("SELECTANO"))
+        {
+            refiltrarTransparencias(request, response);
+        }
+    }
+    
+    public void refiltrarTransparencias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        RequestDispatcher reqDisp;
         
-       if(action.equals("CADASTRAR"))
-       {
-           cadastrarTransparencia(request, response);
-       }
-       else if(action.equals("DELETAR"))
-       {
-           deletarTransparencia(request, response, id);
-       }
+        int valorAno = Integer.parseInt(request.getParameter("valAno"));
+        
+        session.setAttribute("janTranspList", transpHandler.getTransparenciasByMesAno(1, valorAno));
+        session.setAttribute("fevTranspList", transpHandler.getTransparenciasByMesAno(2, valorAno));
+        session.setAttribute("marTranspList", transpHandler.getTransparenciasByMesAno(3, valorAno));
+        session.setAttribute("abrTranspList", transpHandler.getTransparenciasByMesAno(4, valorAno));
+        session.setAttribute("maiTranspList", transpHandler.getTransparenciasByMesAno(5, valorAno));
+        session.setAttribute("junTranspList", transpHandler.getTransparenciasByMesAno(6, valorAno));
+        session.setAttribute("julTranspList", transpHandler.getTransparenciasByMesAno(7, valorAno));
+        session.setAttribute("agoTranspList", transpHandler.getTransparenciasByMesAno(8, valorAno));
+        session.setAttribute("setTranspList", transpHandler.getTransparenciasByMesAno(9, valorAno));
+        session.setAttribute("outTranspList", transpHandler.getTransparenciasByMesAno(10, valorAno));
+        session.setAttribute("novTranspList", transpHandler.getTransparenciasByMesAno(11, valorAno));
+        session.setAttribute("dezTranspList", transpHandler.getTransparenciasByMesAno(12, valorAno));
+
+        session.setAttribute("transpList", transpHandler.getTransparenciasAdicionadasByAno(valorAno));
+        
+        reqDisp = request.getRequestDispatcher("/visualizar-transparencia/visualizar-transparencia.jsp");
+        reqDisp.forward(request, response);
     }
                       
     public void cadastrarTransparencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -70,20 +104,21 @@ public class ServletTransparencia extends HttpServlet {
         if(userId != null)
         {
             Transparencia novaTransparencia = new Transparencia();
-            SimpleDateFormat date = new SimpleDateFormat("dd-MM-YYYY");
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+            NumberFormat formatter = NumberFormat.getInstance(Locale.FRANCE);
             
             novaTransparencia.setUsuario(userHandler.findUsuario(userId));
-            String dataString = request.getParameter("valData");
-            double valor = request.getParameter("valValor").equals("") ? 0 : Double.parseDouble(request.getParameter("valValor"));
-           
             novaTransparencia.setDescricao(request.getParameter("valDescricao"));
-            novaTransparencia.setValor(valor);
             
-            try{
+            String dataString = request.getParameter("valData");
+
+            try {
+                Number crudeNumber = formatter.parse(request.getParameter("valValor"));
+                novaTransparencia.setValor(crudeNumber.doubleValue());
+                
                 Date dataVigencia = date.parse(dataString);
                 novaTransparencia.setDataVigencia(dataVigencia);
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             
@@ -92,7 +127,18 @@ public class ServletTransparencia extends HttpServlet {
             if(!resultado.hasErrors)
             {
                 request.setAttribute("successMessage", "Transparência Postada Com Sucesso!");
-            }else
+                
+                String smtpUsername = psHandler.findParametro("SMTPUSERNAME").data.getValor();
+                String smtpPassword = psHandler.findParametro("SMTPPASSWORD").data.getValor();
+                
+                for(Usuario usr : userHandler.getUsuarios())
+                {
+                    EmailSender notificador = new EmailSender("Um novo gasto foi postado por parte do síndico!", smtpUsername, smtpPassword);
+                    notificador.setDestinatario(usr.getEmail());
+                    notificador.start();
+                }
+            }
+            else
             {
                 request.setAttribute("errorMessage", resultado.message);
             }
@@ -101,24 +147,5 @@ public class ServletTransparencia extends HttpServlet {
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }
-    
-    }
-    
-    public void deletarTransparencia(HttpServletRequest request, HttpServletResponse response, String id)
-            throws ServletException, IOException
-    {
-        Long transparenciaId = Long.parseLong(id);
-        
-        transpHandler.deleteTransparencia(transparenciaId);
-        
-        Map<String, String> options = new LinkedHashMap<>();
-        options.put("success", "TRUE");
-        
-        String json = new Gson().toJson(options);
-        
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-    
     }
 }

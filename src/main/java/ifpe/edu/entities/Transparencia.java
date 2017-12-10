@@ -14,8 +14,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,11 +21,14 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name="TB_TRANSPARENCIA")
 @NamedQueries({
-    @NamedQuery(name ="Transparencia.getTransparenciaAdicionadas",
-            query = "SELECT t FROM Transparencia t ORDER BY t.dataVigencia"),
+    @NamedQuery(name ="Transparencia.getTransparenciaAdicionadas", query = "SELECT t FROM Transparencia t ORDER BY t.dataVigencia"),
+    @NamedQuery(name ="Transparencia.getTransparenciasByMes", query = "SELECT t FROM Transparencia t WHERE FUNC('MONTH' , t.dataVigencia) = :mes ORDER BY t.dataVigencia"),
+    @NamedQuery(name ="Transparencia.getTransparenciasByMesAno", query = "SELECT t FROM Transparencia t WHERE FUNC('MONTH' , t.dataVigencia) = :mes AND FUNC('YEAR', t.dataVigencia) = :ano ORDER BY t.dataVigencia"),
+    @NamedQuery(name ="Transparencia.getTransparenciasByAno", query = "SELECT t FROM Transparencia t WHERE FUNC('YEAR', t.dataVigencia) = :ano ORDER BY t.dataVigencia"),
     @NamedQuery(name ="Transparencia.findById", query = "SELECT t FROM Transparencia t WHERE t.id = :id")
 })
 public class Transparencia implements Serializable {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     protected Long id;
@@ -41,7 +42,7 @@ public class Transparencia implements Serializable {
     @Column(name="DT_VIGENCIA")
     private Date dataVigencia;
     
-    @Min(1)
+    @Min(value = 1, message = "Valor deve ser maior ou igual à 1, no mínimo.")
     @Column(name="NUM_VALOR")
     private double valor;
     

@@ -1,3 +1,12 @@
+.close {
+    color: red; 
+    opacity: 1;
+}
+
+.close:hover {
+    color: red
+}
+
 .main-informativo {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -6,6 +15,13 @@
     width: 70%;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.main-informativo .h-status {
+  width: 100%;
+  height: 7px;
+  margin-bottom: 5px;
+  background: repeating-linear-gradient(45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px);
 }
 
 .main-informativo:hover {

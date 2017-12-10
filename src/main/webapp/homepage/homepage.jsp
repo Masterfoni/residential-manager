@@ -27,6 +27,8 @@
             <c:forEach items="${inforList}" var="informativo">
                 <div class="main-informativo" data-toggle="tooltip" data-placement="right"
                      title="Este informativo foi adicionado às: ${informativo.getDataCriacao()}">
+                    <div class="h-status">
+                    </div>
                     <c:if test="${sessionScope.userType == 2}">
                         <button type="button" class="close" onclick="deletaInformativo(this, ${informativo.getId()})">&times;</button>
                     </c:if>

@@ -1,5 +1,5 @@
 function deletaTransparencia(element, id) {
-    $.post("ServletTransparencia", {ACTION: 'DELETAR', transparenciaId: id}, function(response) {
+    $.get("ServletTransparencia", {transparenciaId: id}, function(response) {
         var convertedResponse = JSON.parse(response);
         if(convertedResponse.Success) {
             element.parentElement.parentElement.parentElement.removeChild(element.parentElement.parentElement);

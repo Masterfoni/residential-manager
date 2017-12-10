@@ -7,8 +7,6 @@ import ifpe.edu.handlers.ParametroSistemaHandler;
 import ifpe.edu.handlers.UsuarioHandler;
 import ifpe.edu.utils.Encoder;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sun.security.util.Password;
 
 @WebServlet
 public class ServletCadastro extends HttpServlet {

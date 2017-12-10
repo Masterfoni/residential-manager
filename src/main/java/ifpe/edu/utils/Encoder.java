@@ -21,7 +21,7 @@ public class Encoder {
                     hash.append(digits[b & 0x0f]);
             }
         } catch (NoSuchAlgorithmException e) {
-			// handle error here.
+            e.printStackTrace();
         }
 
         return hash.toString();

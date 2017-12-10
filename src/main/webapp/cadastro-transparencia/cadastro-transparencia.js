@@ -1,2 +1,1 @@
-$('.valor').mask("999.999999 ", {'placeholder': ''
-    });
+$('.valor').maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
