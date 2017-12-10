@@ -39,10 +39,16 @@
                     </li>
                     <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portal de Transparencia <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a onclick="encaminhaRequisicao('VTRANSPARENCIA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Visualizar Transparencia</a></li>
-                                <c:if test="${sessionScope.userType ==2}">
-                                <li><a onclick="encaminhaRequisicao('CTRANSPARENCIA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Adicionar Transparencia</a></li>
-                                </c:if>
+                            <c:if test="${sessionScope.userType != 3 }">
+                                <li>
+                                    <a onclick="encaminhaRequisicao('VTRANSPARENCIA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Visualizar Transparencia</a>
+                                </li>
+                            </c:if>
+                            <c:if test="${sessionScope.userType == 2}">
+                                <li>
+                                    <a onclick="encaminhaRequisicao('CTRANSPARENCIA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Adicionar Transparencia</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </li>
                     <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reservas <span class="caret"></span></a>
