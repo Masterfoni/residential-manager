@@ -1,6 +1,8 @@
 package ifpe.edu.servlets;
 
+import ifpe.edu.handlers.DependenciaHandler;
 import ifpe.edu.handlers.InformativoHandler;
+import ifpe.edu.handlers.ReservaHandler;
 import ifpe.edu.handlers.TransparenciaHandler;
 import ifpe.edu.handlers.VisitaHandler;
 import java.io.IOException;
@@ -24,6 +26,12 @@ public class ServletEncaminhador extends HttpServlet {
     
     @EJB
     TransparenciaHandler transpHandler;
+    
+    @EJB
+    DependenciaHandler depHandler;
+    
+    @EJB
+    ReservaHandler resHandler;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +71,7 @@ public class ServletEncaminhador extends HttpServlet {
             reqDisp = request.getRequestDispatcher("/homepage/homepage.jsp");
             reqDisp.forward(request, response);
         }
-        if(action.equals("RVISITA"))
+        else if(action.equals("RVISITA"))
         {
             reqDisp = request.getRequestDispatcher("/cadastro-visitas/cadastro-visitas.jsp");
             reqDisp.forward(request, response);
@@ -78,7 +86,7 @@ public class ServletEncaminhador extends HttpServlet {
             reqDisp = request.getRequestDispatcher("/gerenciar-visitas/gerenciar-visitas.jsp");
             reqDisp.forward(request, response);
         }
-        if(action.equals("CTRANSPARENCIA"))
+        else if(action.equals("CTRANSPARENCIA"))
         {
             reqDisp = request.getRequestDispatcher("/cadastro-transparencia/cadastro-transparencia.jsp");
             reqDisp.forward(request, response);
@@ -104,6 +112,20 @@ public class ServletEncaminhador extends HttpServlet {
             session.setAttribute("transpList", transpHandler.getTransparenciasAdicionadasByAno(2017));
             
             reqDisp = request.getRequestDispatcher("/visualizar-transparencia/visualizar-transparencia.jsp");
+            reqDisp.forward(request, response);
+        }
+        else if(action.equals("CRESERVA"))
+        {
+            session.setAttribute("dependencias", depHandler.getDependenciasAtivas());
+            
+            reqDisp = request.getRequestDispatcher("/cadastro-reserva/cadastro-reserva.jsp");
+            reqDisp.forward(request, response);
+        }
+        else if(action.equals("VRESERVA"))
+        {
+            session.setAttribute("reservaList", resHandler.getReservasPendentes());
+            
+            reqDisp = request.getRequestDispatcher("/visualizar-reserva/visualizar-reserva.jsp");
             reqDisp.forward(request, response);
         }
     }

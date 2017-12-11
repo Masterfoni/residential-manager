@@ -53,9 +53,12 @@
                     </li>
                     <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reservas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Gerenciar Reservas</a></li>
-                            <li><a href="#">Realizar Reserva</a></li>
-                            <li><a href="#">Visualizar Reserva</a></li>
+                            <c:if test="${sessionScope.userType == 2}">
+                                <li><a onclick="encaminhaRequisicao('VRESERVA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Gerenciar Reservas</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.userType != 3}">
+                                <li><a onclick="encaminhaRequisicao('CRESERVA')" class="dropdown-toggle" data-toogle="dropdow" role="button" aria-expanded="false">Realizar Reserva</a></li>
+                            </c:if>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitas <span class="caret"></span></a>

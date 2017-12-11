@@ -8,12 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TB_DEPENDENCIA")
 @Access(AccessType.FIELD)
+@NamedQueries({
+    @NamedQuery(name = "Dependencia.getDependenciasAtivas", query = "SELECT d FROM Dependencia d WHERE d.ativa = 1"),
+    @NamedQuery(name = "Dependencia.findById", query = "SELECT d FROM Dependencia d WHERE d.id = :id")
+})
 public class Dependencia implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

@@ -7,6 +7,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TB_RESERVA")
+@NamedQueries({
+    @NamedQuery(name = "Reserva.getReservasPendentes", query = "SELECT r FROM Reserva r WHERE r.situacao = 0"),
+    @NamedQuery(name = "Reserva.findById", query = "SELECT r FROM Reserva r WHERE r.id = :id")
+})
 public class Reserva implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -26,10 +30,12 @@ public class Reserva implements Serializable {
     @Column(name="SITUACAO")
     private int situacao;
     
+    @NotNull
     @OneToOne
     @JoinColumn(name="ID_USUARIO", referencedColumnName="ID")
     private Usuario usuario;
     
+    @NotNull
     @OneToOne
     @JoinColumn(name="ID_DEPENDENCIA", referencedColumnName="ID")
     private Dependencia dependencia;
