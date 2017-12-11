@@ -10,11 +10,9 @@ import ifpe.edu.utils.BoolRequestResult;
 import ifpe.edu.utils.EmailSender;
 import ifpe.edu.utils.RequestResult;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -105,7 +103,6 @@ public class ServletTransparencia extends HttpServlet {
         {
             Transparencia novaTransparencia = new Transparencia();
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-            NumberFormat formatter = NumberFormat.getInstance(Locale.FRANCE);
             
             novaTransparencia.setUsuario(userHandler.findUsuario(userId));
             novaTransparencia.setDescricao(request.getParameter("valDescricao"));
@@ -113,8 +110,9 @@ public class ServletTransparencia extends HttpServlet {
             String dataString = request.getParameter("valData");
 
             try {
-                Number crudeNumber = formatter.parse(request.getParameter("valValor"));
-                novaTransparencia.setValor(crudeNumber.doubleValue());
+                String numberString = request.getParameter("valValor").replace(".", "");
+                numberString = numberString.replaceAll(",", ".");
+                novaTransparencia.setValor(Double.parseDouble(numberString));
                 
                 Date dataVigencia = date.parse(dataString);
                 novaTransparencia.setDataVigencia(dataVigencia);
